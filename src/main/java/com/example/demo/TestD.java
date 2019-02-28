@@ -3,9 +3,9 @@ package com.example.demo;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import org.apache.commons.text.StringEscapeUtils;
 
 public class TestD {
 
@@ -28,6 +28,10 @@ public class TestD {
 //		ids2.stream().forEach(isd ->{
 //			System.out.println(isd);
 //		});
+		
+		String ss= "测试标题&casd& #40; asdf & #41;";
+		
+		System.out.println(StringEscapeUtils.unescapeHtml4(ss.replaceAll("\\s*","")));
 	}
 
 	
