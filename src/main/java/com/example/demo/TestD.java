@@ -29,9 +29,11 @@ public class TestD {
 //			System.out.println(isd);
 //		});
 		
-		String ss= "测试标题&casd& #40; asdf & #41;";
+//		String ss= "  测试标题&casd& #40; asdf & #41;  ";
+//		System.out.println(StringEscapeUtils.unescapeHtml4(ss.replaceAll("\\s*","")));
 		
-		System.out.println(StringEscapeUtils.unescapeHtml4(ss.replaceAll("\\s*","")));
+		System.out.println("bqi_web".contains("fxh"));
+		
 	}
 
 	
