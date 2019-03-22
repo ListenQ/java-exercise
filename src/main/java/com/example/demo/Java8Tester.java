@@ -41,6 +41,15 @@ public class Java8Tester {
 		System.out.println("排序之前是：" + names1);
 		sortUsingJava8(names1);
 		System.out.println("排序之后：" + names1);
+		
+		//TODO 并行排序
+		int [] data = {4,12,1,3,5,7,9};
+		Arrays.parallelSort(data);
+		System.out.println(Arrays.toString(data));
+		
+		int [] data2 = {4, 16, 17, 20, 25, 32, 41};
+		Arrays.parallelPrefix(data2, Integer :: sum);
+		System.out.println(Arrays.toString(data2));
 
 		// TODO 变量作用域 不能在 lambda 内部修改定义在域外的局部变量(非final变量是可以的)
 		// lambda 表达式的局部变量可以不用声明为 final，但是必须不可被后面的代码修改如 testMsg,而局外的变量是可以修改的 如s1
