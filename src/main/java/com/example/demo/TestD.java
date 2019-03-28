@@ -34,6 +34,8 @@ public class TestD {
 		
 //		System.out.println("bqi_web".contains("fxh"));
 		
+		System.out.println(Arrays.asList("normal","spam","ad","flood","meaningless").contains("ad"));
+		
 		
 		
 	}
