@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.text.StringEscapeUtils;
 
 public class TestD {
@@ -36,7 +37,7 @@ public class TestD {
 		
 		System.out.println(Arrays.asList("normal","spam","ad","flood","meaningless").contains("ad"));
 		
-		
+		System.out.println("古典砖 032501-A#1A2B#600*198#598*198#优等".split(",")[0].split("#")+"");
 		
 	}
 
