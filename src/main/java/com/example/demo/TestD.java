@@ -3,11 +3,40 @@ package com.example.demo;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.text.StringEscapeUtils;
 
 public class TestD {
+	
+	class Stu {
+		private String name;
+		private String number;
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public String getNumber() {
+			return number;
+		}
+		public void setNumber(String number) {
+			this.number = number;
+		}
+		@Override
+		public String toString() {
+			return "Stu [name=" + name + ", number=" + number + "]";
+		}
+	}
 
 	public static void main(String[] args) throws UnsupportedEncodingException {
 		int [][] num = {{625,270},{1250,540}};
@@ -34,12 +63,26 @@ public class TestD {
 		
 //		System.out.println("bqi_web".contains("fxh"));
 		
+		String sss ="B123a##6g#鍒堕€犲晢c#浼樼瓑#71,妫夌嚎 A21-71234##7g#鍒堕€犲晢d#浼樼瓑#72";
+		System.out.println(sss.split(",")[1].contains("#71"));
+		String str = "452.00片";
+		System.out.println(str.substring(0,str.indexOf("片")));
 		
+		
+		
+		List<Map<String, String>> list = new ArrayList<>();
+		Map<String, String> map = new HashMap<>();
+		map.put("batch_id", "124578412");
+		map.put("sqrialno", "1");
+		list.add(map);
+		
+		Stu stu = new TestD().new Stu();
+		stu.setName(list.stream().map(m ->m.get("batch_id")).findFirst().get());
+		stu.setNumber(list.stream().map(m ->m.get("sqrialno")).findFirst().get());
+		System.out.println(stu);
 		
 	}
-
 	
-
 	
 
 }

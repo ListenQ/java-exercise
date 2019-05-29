@@ -67,7 +67,7 @@ public class Java8Tester {
 		names.add("Baidu");
 		names.add("Sina");
 		names.forEach(System.out::println);// 吧System.out.println这个方法当做参数传递
-
+		
 		// TODO 函数式接口
 		List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 		System.out.println("输出所有数据：");
@@ -109,7 +109,9 @@ public class Java8Tester {
 		// parallelStream 是流并行处理程序的代替方法
 		List<String> strLists = Arrays.asList("abs", "", "bc", "egf", "abcd", "jlk");
 		long num = strLists.parallelStream().filter(str -> str.isEmpty()).count();
-		long reduce = LongStream.rangeClosed(0, 10000000000L).parallel().reduce(0, Long::sum);
+		//long reduce = LongStream.rangeClosed(0, 10000000000L).parallel().reduce(0,Long::sum);
+		long reduce = LongStream.rangeClosed(0, 10000000000L).parallel().reduce(0,(a,b) ->a+b);
+		System.out.println("reduce:"+reduce);
 		System.out.println("字符串为空的数量有：" + num);
 
 		// Collectors 类实现了很多归约操作
