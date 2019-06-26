@@ -39,17 +39,18 @@ public class TestD {
 		
 		//System.out.println("古典砖 032501-A#1A2B#600*198#598*198#优等".split(",")[0].split("#")+"");
 		
-		String units = "4#204.17";
-		String[] strings = units.split(",");
-		System.out.println(strings[0].indexOf("4#"));
-		if(strings.length >1) {
-			double d = Double.valueOf(strings[0].substring(strings[0].indexOf("4#")+2, strings[0].length()));
-			double dd = Double.valueOf(strings[1].substring(strings[1].indexOf("5#")+2, strings[1].length()));
-			System.out.println(d-dd);
-		}else {
-			System.out.println(strings[0].substring(0,1));
-			System.out.println(units.substring(2));
-		}
+//		String units = "4#204.17";
+//		String[] strings = units.split(",");
+//		System.out.println(strings[0].indexOf("4#"));
+//		if(strings.length >1) {
+//			double d = Double.valueOf(strings[0].substring(strings[0].indexOf("4#")+2, strings[0].length()));
+//			double dd = Double.valueOf(strings[1].substring(strings[1].indexOf("5#")+2, strings[1].length()));
+//			System.out.println(d-dd);
+//		}else {
+//			System.out.println(strings[0].substring(0,1));
+//			System.out.println(units.substring(2));
+//		}
+		
 	}
 	
 	
