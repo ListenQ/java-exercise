@@ -1,8 +1,12 @@
 package com.example.demo;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 
 import org.apache.commons.lang3.math.NumberUtils;
@@ -10,7 +14,7 @@ import org.apache.commons.text.StringEscapeUtils;
 
 public class TestD {
 
-	public static void main(String[] args) throws UnsupportedEncodingException {
+	public static void main(String[] args) throws Exception {
 		int [][] num = {{625,270},{1250,540}};
 		int [] w = {1250,540};
 		List<Long> ids = Arrays.asList(12l,45l,6564l,7l);
@@ -51,6 +55,11 @@ public class TestD {
 //			System.out.println(units.substring(2));
 //		}
 		
+		String pwd = "listenq2019.erp";
+		 MessageDigest md = MessageDigest.getInstance("MD5");
+        // 计算md5函数 59b60bdb39cd2852efe51b21b27a69c4
+        md.update(pwd.getBytes());
+        System.out.println(new BigInteger(1, md.digest()).toString(16));
 	}
 	
 	
