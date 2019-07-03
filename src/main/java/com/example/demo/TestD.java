@@ -1,19 +1,12 @@
 package com.example.demo;
 
-import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
-import org.apache.commons.text.StringEscapeUtils;
 
 public class TestD {
 	
@@ -38,7 +31,7 @@ public class TestD {
 		}
 	}
 
-	public static void main(String[] args) throws UnsupportedEncodingException {
+	public static void main(String[] args) throws Exception {
 		int [][] num = {{625,270},{1250,540}};
 		int [] w = {1250,540};
 		List<Long> ids = Arrays.asList(12l,45l,6564l,7l);
@@ -46,7 +39,7 @@ public class TestD {
 		Long id = 454l;
 		//System.out.println(Arrays.equals(num[0],w));
 		//System.out.println(ids.contains(id));
-		String s[] = "|Wechat|feixiaohao07|copy".split("\\|");
+		//String s[] = "|Wechat|feixiaohao07|copy".split("\\|");
 		//System.out.println(s[2]);
 		
 //		for (int i = 0; i < 10; i++) {
@@ -63,12 +56,12 @@ public class TestD {
 		
 //		System.out.println("bqi_web".contains("fxh"));
 		
+
 		String sss ="B123a##6g#鍒堕€犲晢c#浼樼瓑#71,妫夌嚎 A21-71234##7g#鍒堕€犲晢d#浼樼瓑#72";
 		System.out.println(sss.split(",")[1].contains("#71"));
 		String str = "452.00片";
 		System.out.println(str.substring(0,str.indexOf("片")));
-		
-		
+
 		
 		List<Map<String, String>> list = new ArrayList<>();
 		Map<String, String> map = new HashMap<>();
@@ -80,8 +73,26 @@ public class TestD {
 		stu.setName(list.stream().map(m ->m.get("batch_id")).findFirst().get());
 		stu.setNumber(list.stream().map(m ->m.get("sqrialno")).findFirst().get());
 		System.out.println(stu);
+
+//		String units = "4#204.17";
+//		String[] strings = units.split(",");
+//		System.out.println(strings[0].indexOf("4#"));
+//		if(strings.length >1) {
+//			double d = Double.valueOf(strings[0].substring(strings[0].indexOf("4#")+2, strings[0].length()));
+//			double dd = Double.valueOf(strings[1].substring(strings[1].indexOf("5#")+2, strings[1].length()));
+//			System.out.println(d-dd);
+//		}else {
+//			System.out.println(strings[0].substring(0,1));
+//			System.out.println(units.substring(2));
+//		}
 		
+		String pwd = "listenq2019.erp";
+		 MessageDigest md = MessageDigest.getInstance("MD5");
+        // 计算md5函数 59b60bdb39cd2852efe51b21b27a69c4
+        md.update(pwd.getBytes());
+        System.out.println(new BigInteger(1, md.digest()).toString(16));
 	}
+	
 	
 	
 

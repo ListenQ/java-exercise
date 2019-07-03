@@ -21,8 +21,8 @@ public class TaskTest {
 			list.add(user);
 		}
 		System.out.println("数据花费了毫秒:"+(System.currentTimeMillis()-start)+",初始数据量大小:"+list.size());
-//		List<User> result = asynchEncry(list, start);
-		List<User> result = streamEncry(list, start);
+		List<User> result = asynchEncry(list, start);
+//		List<User> result = streamEncry(list, start);
 		System.out.println("结果大小:"+result);
 	}
 	
