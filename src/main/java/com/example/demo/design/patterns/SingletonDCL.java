@@ -1,8 +1,8 @@
 package com.example.demo.design.patterns;
 
 /**
- * 单例模式-双检锁/双重校验锁
- * 线程安全
+ * 单例模式-双检锁/双重校验锁(禁止重排序)
+ * 线程安全 
  * 采用双锁机制，安全且在多线程情况下能保持高性能。
  * SingletonDCL<BR>
  * 创建人：zhangqi <BR>
