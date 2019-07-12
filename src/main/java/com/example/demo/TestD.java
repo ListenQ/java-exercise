@@ -4,9 +4,15 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class TestD {
 	
@@ -32,6 +38,12 @@ public class TestD {
 	}
 
 	public static void main(String[] args) throws Exception {
+		
+		ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 10, 15, TimeUnit.SECONDS, new 
+				ArrayBlockingQueue<Runnable>(5),new ThreadPoolExecutor.CallerRunsPolicy()
+				);
+		
+		
 		int [][] num = {{625,270},{1250,540}};
 		int [] w = {1250,540};
 		List<Long> ids = Arrays.asList(12l,45l,6564l,7l);
@@ -86,11 +98,19 @@ public class TestD {
 //			System.out.println(units.substring(2));
 //		}
 		
-		String pwd = "listenq2019.erp";
+		String pwd = "zq19940726";
 		 MessageDigest md = MessageDigest.getInstance("MD5");
         // 计算md5函数 59b60bdb39cd2852efe51b21b27a69c4
         md.update(pwd.getBytes());
-        System.out.println(new BigInteger(1, md.digest()).toString(16));
+//        System.out.println(new BigInteger(1, md.digest()).toString(16));
+        //Z5q4dKWQy77vfnUd0TjIOuYl0BIcKSBl4t4CoDEFrM4
+        String head = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9";
+        String content = "eyJleHAiOjE1NjM1MzU2NTcsInVzZXJfbmFtZSI6IjEzNDgwMDQiLCJqdGkiOiJmODFjNGI4YS0wZDM5LTQ3MmYtOWVjMi1iZDgzOWY2OGIyMGQiLCJjbGllbnRfaWQiOiJ4aF93ZWIiLCJzY29wZSI6WyJzZXJ2ZXIiXX0";
+        byte[] decode = Base64.getDecoder().decode(head);
+        byte[] decode2 = Base64.getDecoder().decode(content);
+        System.out.println(new String(decode,"UTF-8")+","+new String(decode2,"UTF-8"));
+        String secret = "XHM@9e7eKW1xyj@!r&fy";
+        System.out.println(Tools.HMACSHA256(head+"."+content, secret));
 	}
 	
 	
