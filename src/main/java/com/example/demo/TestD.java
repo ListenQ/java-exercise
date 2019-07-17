@@ -103,17 +103,17 @@ public class TestD {
         // 计算md5函数 59b60bdb39cd2852efe51b21b27a69c4
         md.update(pwd.getBytes());
 //        System.out.println(new BigInteger(1, md.digest()).toString(16));
-        //s5W9YTY0heh4f25i4nSyKOqtkMn7Zco2pzBZS1T7uyA
-        String head = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9";
-        String content = "eyJleHAiOjE1NjI4OTM5NTUsInVzZXJfbmFtZSI6IjEyMDMyMjAiLCJqdGkiOiI3ODgzZTFmOS1hN2E4LTQ4ZTctYmQ0Ny1kOTYzYmNiODdkZWEiLCJjbGllbnRfaWQiOiJ4aF93ZWIiLCJzY29wZSI6WyJzZXJ2ZXIiXX0";
-        byte[] decode = Base64.getDecoder().decode(head);
-        byte[] decode2 = Base64.getDecoder().decode(content);
-        System.out.println(new String(decode,"UTF-8")+","+new String(decode2,"UTF-8"));
-//        String secret = "XHM@9e7eKW1xyj@!r&fy";
-//        System.out.println(Tools.HMACSHA256(head+"."+"eyJpc3MiOiJuaW5naGFvLm5ldCIsImV4cCI6IjE0Mzg5NTU0NDUiLCJuYW1lIjoid2FuZ2hhbyIsImFkbWluIjp0cnVlfQ", "secret"));
         short a = 128;
         byte b = (byte)a;
         System.out.println(a+"**"+b);
+        //Z5q4dKWQy77vfnUd0TjIOuYl0BIcKSBl4t4CoDEFrM4
+        String head = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9";
+        String content = "eyJleHAiOjE1NjM1MzU2NTcsInVzZXJfbmFtZSI6IjEzNDgwMDQiLCJqdGkiOiJmODFjNGI4YS0wZDM5LTQ3MmYtOWVjMi1iZDgzOWY2OGIyMGQiLCJjbGllbnRfaWQiOiJ4aF93ZWIiLCJzY29wZSI6WyJzZXJ2ZXIiXX0";
+        byte[] decode = Base64.getDecoder().decode(head);
+        byte[] decode2 = Base64.getDecoder().decode(content);
+        System.out.println(new String(decode,"UTF-8")+","+new String(decode2,"UTF-8"));
+        String secret = "XHM@9e7eKW1xyj@!r&fy";
+        System.out.println(Tools.HMACSHA256(head+"."+content, secret));
 	}
 	
 	
