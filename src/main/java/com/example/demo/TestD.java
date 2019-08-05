@@ -114,6 +114,8 @@ public class TestD {
         System.out.println(new String(decode,"UTF-8")+","+new String(decode2,"UTF-8"));
         String secret = "XHM@9e7eKW1xyj@!r&fy";
         System.out.println(Tools.HMACSHA256(head+"."+content, secret));
+        
+        
 	}
 	
 	
