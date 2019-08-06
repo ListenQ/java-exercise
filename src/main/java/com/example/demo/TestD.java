@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,8 +10,6 @@ import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class TestD {
 	
