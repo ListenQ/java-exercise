@@ -12,6 +12,14 @@ import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
 import javax.imageio.stream.ImageOutputStream;
 
+/**
+ * 压缩
+ * Compresssion<BR>
+ * 创建人：zhangqi <BR>
+ * 时间：2019年8月7日-下午9:48:39 <BR>
+ * @version 1.0.0
+ * 
+ */
 public class Compresssion {
 	
 	public static void main(String[] args) {
