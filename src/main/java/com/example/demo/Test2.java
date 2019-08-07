@@ -34,14 +34,14 @@ public class Test2 {
 //		}
 //		System.out.println(map.get("messageId"));
 		
-		Test2 test = new Test2();
+		/*Test2 test = new Test2();
 		test.setT(Arrays.asList(new T1(),new T2(),new T3()));
 		
 		ExecutorService executors= Executors.newFixedThreadPool(3);
 		for (final TAbract tt : t) {
 			executors.execute(new ThreadDemo(tt));
 		}
-		executors.shutdown();
+		executors.shutdown();*/
 		
 		/*try {
 			CountDownLatch c = new CountDownLatch(2); // join
@@ -66,7 +66,6 @@ public class Test2 {
 			executors.shutdown();
 		}
 		System.out.println(4);*/
-		
 		
 	}
 	
