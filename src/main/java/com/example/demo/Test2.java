@@ -1,11 +1,18 @@
 package com.example.demo;
 
 import java.text.ParseException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 
 import com.example.demo.mult.thread.countdownlatch.TAbract;
 
@@ -20,8 +27,6 @@ public class Test2 {
 	public void setT(List<TAbract> t) {
 		this.t = t;
 	}
-
-
 
 	public static void main(String[] args) throws InterruptedException, ParseException {
 //		long number = t();
@@ -39,7 +44,7 @@ public class Test2 {
 		/*Test2 test = new Test2();
 		test.setT(Arrays.asList(new T1(),new T2(),new T3()));
 		
-		ExecutorService executors= Executors.newFixedThreadPool(3);
+		ExecutorService executors= Executors.newFixedThreadPool(3);//这种写法不合理，应当用ThreadPoolExecutor
 		for (final TAbract tt : t) {
 			executors.execute(new ThreadDemo(tt));
 		}
@@ -83,7 +88,9 @@ public class Test2 {
 		mapp.put("st3", null);
 		JSONObject json = JSONObject.fromObject(mapp);
 		System.out.println(dataFilter(json));
+		
 	}
+	
 	
 	
 	
