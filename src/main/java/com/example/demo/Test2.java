@@ -1,27 +1,16 @@
 package com.example.demo;
 
 import java.text.ParseException;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
-import com.example.demo.mult.thread.countdownlatch.T1;
-import com.example.demo.mult.thread.countdownlatch.T2;
-import com.example.demo.mult.thread.countdownlatch.T3;
 import com.example.demo.mult.thread.countdownlatch.TAbract;
 import com.example.demo.mult.thread.countdownlatch.ThreadDemo;
 
@@ -36,6 +25,7 @@ public class Test2 {
 	public void setT(List<TAbract> t) {
 		this.t = t;
 	}
+	private static final String [][] transactionTime = {{"09:30:00","11:30:00"},{"13:00:00","15:00:00"}}; 
 
 	public static void main(String[] args) throws InterruptedException, ParseException {
 //		long number = t();
@@ -83,25 +73,57 @@ public class Test2 {
 			executors.shutdown();
 		}
 		System.out.println(4);*/
-		String [][] transactionTime = {{"09:30:00","11:30:00"},{"13:00:00","15:00:00"}}; 
 		
-		Map<String, String> map = new HashMap<String, String>();
+		
+		/*Map<String, String> map = new HashMap<String, String>();
 		map.put("name1", "dsf");
-		map.put("time", "16:00:03");
+		map.put("time", "09:00:03");
 		
 		Map<String, String> map1 = new HashMap<String, String>();
 		map1.put("name1", "zqq");
-		map1.put("time", "11:00:03");
+		map1.put("time", "13:00:03");
+		Map<String, String> map2 = new HashMap<String, String>();
+		map2.put("name1", "zqqasd");
+		map2.put("time", "13:00:03");
+		
 		Map<String, Map<String, String>> mapp = new HashMap<>();
 		mapp.put("st", map);
 		mapp.put("st2", map1);
 		mapp.put("st3", null);
+		mapp.put("st4", map2);
 		JSONObject json = JSONObject.fromObject(mapp);
-		System.out.println(dataFilter(json));
-		
+		System.out.println(dataFilter(json));*/
+		long start = System.currentTimeMillis();
+		List<String> strs = initMinuteTime();
+		System.out.println("花费了:"+(System.currentTimeMillis()-start));
+		System.out.println(strs);
 	}
 	
 	
+	@SuppressWarnings("serial")
+	private static List<String> initMinuteTime() throws ParseException {
+		boolean flag = true;
+		List<String> times = new ArrayList<String>() {{
+			add("09:30");
+		}};
+		String start = "09:30";
+		while(flag) {
+			Date startTime = DateUtils.parseDate(start.toString(), "HH:mm");
+			String nextTime = DateFormatUtils.format(DateUtils.addMinutes(startTime, 4), "HH:mm");
+			if(nextTime.compareTo("11:30") <=0 || (nextTime.compareTo("15:00") <=0) && nextTime.compareTo("13:00") >= 0) {
+				times.add(nextTime);
+			}
+			if((nextTime.compareTo("11:30") >0 && nextTime.compareTo("13:00") < 0)) {
+				start = "12:56";
+			}else {
+				start= nextTime;
+			}
+			if(nextTime.compareTo("15:00") >0) {
+				flag = false;
+			}
+		}
+		return times;
+	}
 	
 	
 	
@@ -136,8 +158,13 @@ public class Test2 {
 				public boolean apply(Object object, String property, Object value) {
 					if(value!=null && value instanceof JSONObject) {
 						JSONObject json = JSONObject.fromObject(value);
-						if(StringUtils.isNotBlank(json.getString("time")) && !isInDate(json.getString("time"))) {
-							return true;
+						if(StringUtils.isNotBlank(json.getString("time"))) {
+							long start = System.currentTimeMillis();
+							boolean result = isInDate(json.getString("time"));
+							System.out.println("花费了:"+(System.currentTimeMillis()-start));
+							if(!result) {
+								return true;
+							}
 						}
 					}
 					return false;
@@ -149,6 +176,14 @@ public class Test2 {
 	}
 	
 	private static boolean isInDate(String time) {
+		/*int [] result = {0};
+		Arrays.asList(transactionTime).forEach(t ->{
+			if(time.compareTo(t[0]) >=0 && time.compareTo(t[1]) <=0) {//这种写法慢个二三十毫秒
+				result[0] = 1;
+				return;
+			}
+		});
+		return result[0] > 0;*/
 		if((time.compareTo("09:30:00")>=0 && time.compareTo("11:30:00") <=0)
 				|| (time.compareTo("13:00:00") >=0 && time.compareTo("15:00:00") <=0)){
 			return true;
