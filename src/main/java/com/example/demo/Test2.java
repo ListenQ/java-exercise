@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -50,12 +52,13 @@ public class Test2 {
 		
 		/*Test2 test = new Test2();
 		test.setT(Arrays.asList(new T1(),new T2(),new T3()));
-		
-		ExecutorService executors= Executors.newFixedThreadPool(3);//这种写法不合理，应当用ThreadPoolExecutor
+		*/
+		ThreadPoolExecutor executors = new ThreadPoolExecutor(3, 10, 60, TimeUnit.MILLISECONDS, null);
+		//ExecutorService executors= Executors.newFixedThreadPool(3);//这种写法不合理，应当用ThreadPoolExecutor
 		for (final TAbract tt : t) {
 			executors.execute(new ThreadDemo(tt));
 		}
-		executors.shutdown();*/
+		executors.shutdown();
 		
 		/*try {
 			CountDownLatch c = new CountDownLatch(2); // join
