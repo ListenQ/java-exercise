@@ -1,11 +1,16 @@
 package com.example.demo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Test3 {
 	
-	public static void main(String[] args) {
+	private static Map<String, Map<String, Detail>> map = new ConcurrentHashMap<>();
+	
+	public static void main(String[] args) throws CloneNotSupportedException {
 		String [][] names = {
 				{"tag_lc","flag_batch","batch_status"},
 				{"tag_lc","flag_not_batch","batch_status"},
@@ -20,8 +25,18 @@ public class Test3 {
 		List<Detail> list = new ArrayList<>();
 		for(int i=0;i<names.length;i++) {
 			list.add(new Detail(names[i][0], names[i][1], names[i][2]));
+			Map<String, Detail> dmap = new HashMap<>();
+			dmap.put(i+"", new Detail(names[i][0], names[i][1], names[i][2]));
+			map.put(""+i, dmap);
 		}
-		System.out.println(list);
+		 Map<String, Detail> clone = map.get("0");
+		 Map<String, Detail> cloneMap = new ConcurrentHashMap<>(clone);
+		Detail detail = new Detail();
+		BeanUtil.copyPropertiesIgnoreNull(cloneMap.get("0"),detail);
+		detail.setAds("-");
+		detail.setName("-");
+		detail.setPwd("-");
+		System.out.println(map);
 	}
 	
 	static class Detail{
@@ -38,6 +53,13 @@ public class Test3 {
 			this.ads = ads;
 		}
 		
+		
+		
+
+		@Override
+		protected Object clone() throws CloneNotSupportedException {
+			return super.clone();
+		}
 
 		@Override
 		public String toString() {
