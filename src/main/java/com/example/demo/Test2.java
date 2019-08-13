@@ -3,16 +3,15 @@ package com.example.demo;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
 import com.example.demo.mult.thread.countdownlatch.TAbract;
-import com.example.demo.mult.thread.countdownlatch.ThreadDemo;
 
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
@@ -43,12 +42,12 @@ public class Test2 {
 		/*Test2 test = new Test2();
 		test.setT(Arrays.asList(new T1(),new T2(),new T3()));
 		*/
-		ThreadPoolExecutor executors = new ThreadPoolExecutor(3, 10, 60, TimeUnit.MILLISECONDS, null);
+		//ThreadPoolExecutor executors = new ThreadPoolExecutor(3, 10, 60, TimeUnit.MILLISECONDS, null);
 		//ExecutorService executors= Executors.newFixedThreadPool(3);//这种写法不合理，应当用ThreadPoolExecutor
-		for (final TAbract tt : t) {
+		/*for (final TAbract tt : t) {
 			executors.execute(new ThreadDemo(tt));
 		}
-		executors.shutdown();
+		executors.shutdown();*/
 		
 		/*try {
 			CountDownLatch c = new CountDownLatch(2); // join
@@ -77,26 +76,36 @@ public class Test2 {
 		
 		/*Map<String, String> map = new HashMap<String, String>();
 		map.put("name1", "dsf");
-		map.put("time", "09:00:03");
+		map.put("time", "09:30:03");
+		map.put("date", "2019-04-15");
 		
 		Map<String, String> map1 = new HashMap<String, String>();
 		map1.put("name1", "zqq");
 		map1.put("time", "13:00:03");
+		map1.put("date", "2019-08-12");
 		Map<String, String> map2 = new HashMap<String, String>();
 		map2.put("name1", "zqqasd");
-		map2.put("time", "13:00:03");
+		map2.put("time", "10:00:03");
+		map2.put("date", "2019-08-19");
+		
+		Map<String, String> map3 = new HashMap<String, String>();
+		map3.put("name1", "zqqasd");
+		map3.put("time", "10:29:03");
+		map3.put("date", "2019-08-12");
 		
 		Map<String, Map<String, String>> mapp = new HashMap<>();
 		mapp.put("st", map);
 		mapp.put("st2", map1);
 		mapp.put("st3", null);
 		mapp.put("st4", map2);
+		mapp.put("st5", map3);
 		JSONObject json = JSONObject.fromObject(mapp);
 		System.out.println(dataFilter(json));*/
-		long start = System.currentTimeMillis();
+		/*long start = System.currentTimeMillis();
 		List<String> strs = initMinuteTime();
 		System.out.println("花费了:"+(System.currentTimeMillis()-start));
-		System.out.println(strs);
+		System.out.println(strs);*/
+		System.out.println(DateFormatUtils.format(DateUtils.addMinutes(new Date(), -1), "yyyy-MM-dd HH:mm:00"));
 	}
 	
 	
@@ -160,9 +169,11 @@ public class Test2 {
 						JSONObject json = JSONObject.fromObject(value);
 						if(StringUtils.isNotBlank(json.getString("time"))) {
 							long start = System.currentTimeMillis();
-							boolean result = isInDate(json.getString("time"));
+							boolean result = isNotInTime(json.getString("time"));
 							System.out.println("花费了:"+(System.currentTimeMillis()-start));
-							if(!result) {
+							if(result) {
+								return true;
+							}else if(StringUtils.isNotBlank(json.getString("date")) && isNotInDate(json.getString("date"))) {
 								return true;
 							}
 						}
@@ -175,7 +186,7 @@ public class Test2 {
 		return null;
 	}
 	
-	private static boolean isInDate(String time) {
+	private static boolean isNotInTime(String time) {
 		/*int [] result = {0};
 		Arrays.asList(transactionTime).forEach(t ->{
 			if(time.compareTo(t[0]) >=0 && time.compareTo(t[1]) <=0) {//这种写法慢个二三十毫秒
@@ -184,11 +195,15 @@ public class Test2 {
 			}
 		});
 		return result[0] > 0;*/
-		if((time.compareTo("09:30:00")>=0 && time.compareTo("11:30:00") <=0)
-				|| (time.compareTo("13:00:00") >=0 && time.compareTo("15:00:00") <=0)){
+		if(time.compareTo("09:30:00")<0 || (time.compareTo("13:00:00") < 0 && time.compareTo("11:30:00") >0)
+				|| time.compareTo("15:00:00") > 0){
 			return true;
 		}
 		return false;
+	}
+	
+	private static boolean isNotInDate(String date) {
+		return DateFormatUtils.format(new Date(), "yyyy-MM-dd").compareTo(date)!=0;
 	}
 
 }
