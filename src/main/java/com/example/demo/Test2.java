@@ -2,8 +2,10 @@ package com.example.demo;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -11,6 +13,9 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
+import com.example.demo.mult.thread.countdownlatch.T1;
+import com.example.demo.mult.thread.countdownlatch.T2;
+import com.example.demo.mult.thread.countdownlatch.T3;
 import com.example.demo.mult.thread.countdownlatch.TAbract;
 import com.example.demo.mult.thread.countdownlatch.ThreadDemo;
 
@@ -40,10 +45,10 @@ public class Test2 {
 //		}
 //		System.out.println(map.get("messageId"));
 		
-		/*Test2 test = new Test2();
+		Test2 test = new Test2();
 		test.setT(Arrays.asList(new T1(),new T2(),new T3()));
-		*/
-		ThreadPoolExecutor executors = new ThreadPoolExecutor(3, 10, 60, TimeUnit.MILLISECONDS, null);
+		
+		ThreadPoolExecutor executors = new ThreadPoolExecutor(3, 10, 10, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(5));
 		//ExecutorService executors= Executors.newFixedThreadPool(3);//这种写法不合理，应当用ThreadPoolExecutor
 		for (final TAbract tt : t) {
 			executors.execute(new ThreadDemo(tt));
@@ -93,10 +98,10 @@ public class Test2 {
 		mapp.put("st4", map2);
 		JSONObject json = JSONObject.fromObject(mapp);
 		System.out.println(dataFilter(json));*/
-		long start = System.currentTimeMillis();
-		List<String> strs = initMinuteTime();
-		System.out.println("花费了:"+(System.currentTimeMillis()-start));
-		System.out.println(strs);
+//		long start = System.currentTimeMillis();
+//		List<String> strs = initMinuteTime();
+//		System.out.println("花费了:"+(System.currentTimeMillis()-start));
+//		System.out.println(strs);
 	}
 	
 	

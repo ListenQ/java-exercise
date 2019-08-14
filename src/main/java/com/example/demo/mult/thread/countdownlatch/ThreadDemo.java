@@ -19,11 +19,11 @@ public class ThreadDemo implements Runnable{
 	public void run() {
 //		service.batch();
 		
-		t.batch();
 		try {
+			t.batch();
 			System.out.println(Thread.currentThread().getName()+DateTimeTest.parseDate("2019-08-07 12:23:54"));
 			System.out.println(Thread.currentThread().getName()+DateTimeTest.dataFormat(new Date()));
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
