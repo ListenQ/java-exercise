@@ -11,6 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
+import com.alibaba.fastjson.JSON;
 import com.example.demo.mult.thread.countdownlatch.TAbract;
 
 import net.sf.json.JSONObject;
@@ -74,15 +75,15 @@ public class Test2 {
 		System.out.println(4);*/
 		
 		
-		/*Map<String, String> map = new HashMap<String, String>();
+		Map<String, String> map = new HashMap<String, String>();
 		map.put("name1", "dsf");
 		map.put("time", "09:30:03");
 		map.put("date", "2019-04-15");
 		
 		Map<String, String> map1 = new HashMap<String, String>();
 		map1.put("name1", "zqq");
-		map1.put("time", "13:00:03");
-		map1.put("date", "2019-08-12");
+		map1.put("time", "11:30:59");
+		map1.put("date", "2019-08-13");
 		Map<String, String> map2 = new HashMap<String, String>();
 		map2.put("name1", "zqqasd");
 		map2.put("time", "10:00:03");
@@ -90,8 +91,8 @@ public class Test2 {
 		
 		Map<String, String> map3 = new HashMap<String, String>();
 		map3.put("name1", "zqqasd");
-		map3.put("time", "10:29:03");
-		map3.put("date", "2019-08-12");
+		map3.put("time", "15:00:03");
+		map3.put("date", "2019-08-13");
 		
 		Map<String, Map<String, String>> mapp = new HashMap<>();
 		mapp.put("st", map);
@@ -99,13 +100,15 @@ public class Test2 {
 		mapp.put("st3", null);
 		mapp.put("st4", map2);
 		mapp.put("st5", map3);
-		JSONObject json = JSONObject.fromObject(mapp);
-		System.out.println(dataFilter(json));*/
+		JSONObject json =JSONObject.fromObject(mapp);
+		long start = System.currentTimeMillis();
+		System.out.println(dataFilter(json));
+		System.out.println("花费了:"+(System.currentTimeMillis()-start));
 		/*long start = System.currentTimeMillis();
 		List<String> strs = initMinuteTime();
 		System.out.println("花费了:"+(System.currentTimeMillis()-start));
 		System.out.println(strs);*/
-		System.out.println(DateFormatUtils.format(DateUtils.addMinutes(new Date(), -1), "yyyy-MM-dd HH:mm:00"));
+//		System.out.println(DateFormatUtils.format(DateUtils.addMinutes(new Date(), -1), "yyyy-MM-dd HH:mm:00"));
 	}
 	
 	
@@ -168,9 +171,7 @@ public class Test2 {
 					if(value!=null && value instanceof JSONObject) {
 						JSONObject json = JSONObject.fromObject(value);
 						if(StringUtils.isNotBlank(json.getString("time"))) {
-							long start = System.currentTimeMillis();
 							boolean result = isNotInTime(json.getString("time"));
-							System.out.println("花费了:"+(System.currentTimeMillis()-start));
 							if(result) {
 								return true;
 							}else if(StringUtils.isNotBlank(json.getString("date")) && isNotInDate(json.getString("date"))) {
@@ -186,6 +187,21 @@ public class Test2 {
 		return null;
 	}
 	
+	private static PropertyFilter dataFilter = new PropertyFilter() {
+		@Override
+		public boolean apply(Object object, String name, Object value) {
+			if (value != null && value instanceof JSONObject) {
+				JSONObject json = (JSONObject) value;
+				if (StringUtils.isNotBlank(json.getString("time")) && isNotInTime(json.getString("time"))) {
+					return true;
+				} else if (StringUtils.isNotBlank(json.getString("date")) && isNotInDate(json.getString("date"))) {
+					return true;
+				}
+			}
+			return false;
+		}
+	};
+	
 	private static boolean isNotInTime(String time) {
 		/*int [] result = {0};
 		Arrays.asList(transactionTime).forEach(t ->{
@@ -195,8 +211,8 @@ public class Test2 {
 			}
 		});
 		return result[0] > 0;*/
-		if(time.compareTo("09:30:00")<0 || (time.compareTo("13:00:00") < 0 && time.compareTo("11:30:00") >0)
-				|| time.compareTo("15:00:00") > 0){
+		if(time.compareTo("09:30:00")<0 || (time.compareTo("13:00:00") < 0 && time.compareTo("11:30:59") >0)
+				|| time.compareTo("15:00:59") > 0){
 			return true;
 		}
 		return false;
