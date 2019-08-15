@@ -30,15 +30,20 @@ public class Test3 {
 			map.put(""+i, dmap);
 		}
 		 Map<String, Detail> clone = map.get("0");
-		 Map<String, Detail> cloneMap = new ConcurrentHashMap<>(clone);
+		Map<String, Detail> cloneMap = new ConcurrentHashMap<>(clone);
 		Detail detail = new Detail();
 		BeanUtil.copyPropertiesIgnoreNull(cloneMap.get("0"),detail);
 		detail.setAds("-");
 		detail.setName("-");
 		detail.setPwd("-");
 		System.out.println(map);
+		
 	}
 	
+	
+
+
+
 	static class Detail{
 		
 		private String name;
