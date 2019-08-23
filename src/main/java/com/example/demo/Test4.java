@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
@@ -13,6 +15,7 @@ import org.apache.commons.lang.time.DateFormatUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.PropertyFilter;
+import com.example.demo.util.UniqueKeyGenerator;
 
 public class Test4 {
 	
@@ -44,10 +47,26 @@ public class Test4 {
 		mapp.put("sh005", map3);
 		long start = System.currentTimeMillis();
 		JSONObject object = (JSONObject) JSON.toJSON(mapp);
-		System.out.println(filter(object));
+//		System.out.println(filter(object));
 //		System.out.println(filter2(object));
 //		System.out.println(JSON.toJSONString(mapp, dataFilter));
-		System.out.println("花费了:"+(System.currentTimeMillis()-start));
+//		System.out.println("花费了:"+(System.currentTimeMillis()-start));
+		
+		ExecutorService executors= Executors.newFixedThreadPool(5);
+		
+		for (int i = 0; i < 5; i++) {
+			executors.execute(new Runnable() {
+				
+				@Override
+				public void run() {
+					for (int i = 0; i < 10; i++) {
+						System.out.println(UniqueKeyGenerator.generate("01","user-service","user-account"));
+					}
+				}
+			});
+		}
+		executors.shutdown();
+		
 	}
 	
 	private static JSONObject filter(JSONObject jsonObject) {
