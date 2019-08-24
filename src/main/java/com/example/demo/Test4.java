@@ -19,13 +19,13 @@ public class Test4 {
 	public static void main(String[] args) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("name1", "dsf");
-		map.put("time", "08:30:03");
-		map.put("date", "2019-08-15");
+		map.put("time", "09:30:03");
+		map.put("date", "2019-08-18");
 		
 		Map<String, String> map1 = new HashMap<String, String>();
 		map1.put("name1", "zqq");
-		map1.put("time", "11:30:59");
-		map1.put("date", "2019-08-15");
+		map1.put("time", "11:30:05");
+		map1.put("date", "2019-08-18");
 		Map<String, String> map2 = new HashMap<String, String>();
 		map2.put("name1", "zqqasd");
 		map2.put("time", "10:00:03");
@@ -34,7 +34,7 @@ public class Test4 {
 		Map<String, String> map3 = new HashMap<String, String>();
 		map3.put("name1", "zqqasd");
 		map3.put("time", "15:00:03");
-		map3.put("date", "2019-08-15");
+		map3.put("date", "2019-08-18");
 		
 		Map<String, Map<String, String>> mapp = new HashMap<>();
 		mapp.put("sz001", map);
@@ -44,8 +44,8 @@ public class Test4 {
 		mapp.put("sh005", map3);
 		long start = System.currentTimeMillis();
 		JSONObject object = (JSONObject) JSON.toJSON(mapp);
-		System.out.println(filter(object));
-//		System.out.println(filter2(object));
+//		System.out.println(filter(object));
+		System.out.println(filter2(object));
 //		System.out.println(JSON.toJSONString(mapp, dataFilter));
 		System.out.println("花费了:"+(System.currentTimeMillis()-start));
 	}
@@ -69,7 +69,7 @@ public class Test4 {
 	private static JSONObject filter2(JSONObject jsonObject) {
 		JSONObject data = new JSONObject();
 		Set<Entry<String, Object>> keySets = jsonObject.entrySet();
-		keySets.parallelStream().parallel().filter(enj ->{
+		keySets.parallelStream().filter(enj ->{
 			JSONObject json = (JSONObject)enj.getValue();
 			if(json ==null || json.isEmpty()) {
 				return false;
