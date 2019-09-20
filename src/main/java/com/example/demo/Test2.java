@@ -7,6 +7,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.Map;
@@ -19,6 +22,7 @@ import com.example.demo.mult.thread.countdownlatch.T2;
 import com.example.demo.mult.thread.countdownlatch.T3;
 import com.alibaba.fastjson.JSON;
 import com.example.demo.mult.thread.countdownlatch.TAbract;
+import com.example.demo.mult.thread.countdownlatch.ThreadDemo;
 
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
@@ -56,32 +60,29 @@ public class Test2 {
 		}
 		executors.shutdown();*/
 		
-		/*try {
-			CountDownLatch c = new CountDownLatch(2); // join
-			for (int i=0;i< 2;i++) {
-				executors.execute(new Runnable() {
-					@Override
-					public void run() {
-						try {
-							Thread.sleep(5000l);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-						System.out.println(Thread.currentThread().getName());
-						c.countDown();
-					}
-				});
+		try {
+			//CountDownLatch c = new CountDownLatch(t.size()); // join
+			List<Future<String>> list = new ArrayList<>();
+			for (final TAbract tt : t) {
+				list.add(executors.submit(new ThreadDemo(tt)));
 			}
-			c.await(1 , TimeUnit.SECONDS);
-			System.out.println(3);
-		}catch(Exception e) {}
+			list.parallelStream().forEach(l ->{
+				try {
+					System.out.println(l.get());
+				} catch (InterruptedException| ExecutionException e) {
+				}
+			});
+			//c.await(1 , TimeUnit.SECONDS);
+		}catch(Throwable e) {
+			e.printStackTrace();
+		}
 		finally {
 			executors.shutdown();
+			System.out.println(4);
 		}
-		System.out.println(4);*/
 		
 		
-		Map<String, String> map = new HashMap<String, String>();
+		/*Map<String, String> map = new HashMap<String, String>();
 		map.put("name1", "dsf");
 		map.put("time", "09:30:03");
 		map.put("date", "2019-04-15");
@@ -115,7 +116,7 @@ public class Test2 {
 		JSONObject json =JSONObject.fromObject(mapp);
 		long start = System.currentTimeMillis();
 		System.out.println(dataFilter(json));
-		System.out.println("花费了:"+(System.currentTimeMillis()-start));
+		System.out.println("花费了:"+(System.currentTimeMillis()-start));*/
 	}
 	
 	
