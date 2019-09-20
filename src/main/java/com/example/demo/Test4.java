@@ -66,7 +66,6 @@ public class Test4 {
 			});
 		}
 		executors.shutdown();
-		
 	}
 	
 	private static JSONObject filter(JSONObject jsonObject) {
