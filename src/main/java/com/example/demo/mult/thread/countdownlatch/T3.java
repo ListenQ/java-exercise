@@ -4,7 +4,7 @@ public class T3 implements TAbract{
 
 	@Override
 	public String batch() {
-		System.out.println("t3....");
+		System.out.println("t3...."+System.nanoTime());
 		return "success3";
 	}
 

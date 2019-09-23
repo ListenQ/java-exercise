@@ -25,9 +25,8 @@ public class ThreadDemo implements Callable<String>{
 //			System.out.println(Thread.currentThread().getName()+DateTimeTest.parseDate("2019-08-07 12:23:54"));
 //			System.out.println(Thread.currentThread().getName()+DateTimeTest.dataFormat(new Date()));
 		} catch (Throwable e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
 		System.out.println(Thread.currentThread().getName()+DateTimeTest.getZeroTime());
 		return result;
 	}

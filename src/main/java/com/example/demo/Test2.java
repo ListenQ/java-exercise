@@ -4,14 +4,13 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import java.util.Map;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -19,7 +18,6 @@ import org.apache.commons.lang3.time.DateUtils;
 import com.example.demo.mult.thread.countdownlatch.T1;
 import com.example.demo.mult.thread.countdownlatch.T2;
 import com.example.demo.mult.thread.countdownlatch.T3;
-import com.alibaba.fastjson.JSON;
 import com.example.demo.mult.thread.countdownlatch.TAbract;
 import com.example.demo.mult.thread.countdownlatch.ThreadDemo;
 
@@ -60,17 +58,24 @@ public class Test2 {
 		executors.shutdown();*/
 		
 		try {
-			//CountDownLatch c = new CountDownLatch(2); // join
+			//CountDownLatch c = new CountDownLatch(t.size()); // join
+			List<Future<String>> list = new ArrayList<>();
 			for (final TAbract tt : t) {
-				Future<?> future = executors.submit(new ThreadDemo(tt));
-				System.out.println(future.get());
+				list.add(executors.submit(new ThreadDemo(tt)));
 			}
 			//c.await(1 , TimeUnit.SECONDS);
+			list.parallelStream().forEach(l ->{
+				try {
+					System.out.println(l.get());
+				} catch (InterruptedException| ExecutionException e) {
+				}
+			});
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		finally {
 			executors.shutdown();
+			System.out.println(4);
 		}
 		System.out.println(4);
 		
@@ -106,6 +111,7 @@ public class Test2 {
 //		List<String> strs = initMinuteTime();
 //		System.out.println("花费了:"+(System.currentTimeMillis()-start));
 //		System.out.println(strs);
+		
 //		JSONObject json =JSONObject.fromObject(mapp);
 //		long start = System.currentTimeMillis();
 //		System.out.println(dataFilter(json));

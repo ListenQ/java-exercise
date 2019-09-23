@@ -10,8 +10,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.apache.commons.lang3.time.DateUtils;
-
 public class DateTimeTest {
 
 	private static final DateTimeFormatter DEFAULT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -29,8 +27,8 @@ public class DateTimeTest {
 //		System.out.println(new Date());
 //		System.out.println(parseDate(LocalDateTime.now()));
 //		System.out.println(getlastTransMinute(DateUtil.dataFormat(DateUtil.parseDate("2019-08-12 13:00:00"))));
-		Date parseDate = DateUtils.parseDate("20190814", "yyyyMMdd");
-		System.out.printf("parseDate:%d",parseDate.toInstant().toEpochMilli());
+		
+		System.out.println(DateUtil.dataFormat(new Date(),"YYYY-MM-dd"));
 	}
 
 	public static Date parseDate(String formatDate) throws ParseException {
