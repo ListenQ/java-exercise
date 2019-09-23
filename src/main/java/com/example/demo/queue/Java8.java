@@ -3,8 +3,10 @@ package com.example.demo.queue;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
@@ -18,7 +20,21 @@ import java.util.stream.Collectors;
  */
 public class Java8 {
 	
+	static ExecutorService executor = Executors.newCachedThreadPool();
+	
 	public static void main(String[] args) {
+		//先回顾下jdk5 的异步编程
+		ExecutorService executorService = Executors.newCachedThreadPool();
+		Future future =  executorService.submit(new Callable<Double>() {
+		    @Override
+		    public Double call() throws Exception {
+		    	System.out.println("做其他的事情");
+		        return 12.0;
+		    }
+		});
+		
+		
+		
 		/*Shop shop = new Java8.Shop("zhangqi");
 		long start = System.currentTimeMillis();
 		Future<Double> priceAsync = shop.getPriceAsync("my name");
@@ -44,14 +60,23 @@ public class Java8 {
 		long start = System.currentTimeMillis();
 		System.out.println(findPrice("java8实战"));
 		long end = System.currentTimeMillis() - start;
-		System.out.println("总消耗时间:" + end+"毫秒");
+		System.out.println("parallelStream总消耗时间:" + end+"毫秒");
+		
+		//CompletableFuture的并行例子
+		long start2 = System.currentTimeMillis();
+		System.out.println(findPrice2("java8实战"));
+		long duration = System.currentTimeMillis() - start2;
+		System.out.println("CompletableFuture总消耗时间：" + duration + "毫秒");
+		
+		//***** 以上比较 parallelStream优于 CompletableFuture*****
+		
 	}
 	
 	public static void doSomethingElse() {
 		System.out.println("做其他的事情...");
 	}
 	
-	
+	//parallelStream的并行操作
 	public static List<String> findPrice(String product){
 		List<Shop> shops = Arrays.asList(new Shop("listenq"),
 				new Shop("张琦"),
@@ -61,6 +86,48 @@ public class Java8 {
 			String.format("%s 的价格是 %.2f",shop.getName(),shop.getPrice(product))
 		).collect(Collectors.toList());
 	}
+	
+	
+//	CompletableFuture的并行操作
+	public static List<String> findPrice2(String product){
+		List<Shop> shops = Arrays.asList(new Shop("listenq"),new Shop("张琦"),new Shop("可爱多"),new Shop("维达"));
+	    List<CompletableFuture<String>> priceFuture = shops.stream()
+	            .map(shop -> CompletableFuture.supplyAsync( // 使用异步的方式计算每种商品的价格
+	                    () -> shop.getName() + " 的价格是 " + shop.getPrice(product)))
+	            .collect(Collectors.toList());
+
+	    return priceFuture.stream()
+	            .map(CompletableFuture::join) //join 操作等待所有异步操作的结果
+	            .collect(Collectors.toList());
+	}
+	
+	//使用CompletableFutures异步操作
+	public static List<String> findPrice4(String product){
+		List<Shop> shops = Arrays.asList(new Shop("listenq"),new Shop("张琦"),new Shop("可爱多"),new Shop("维达"));
+		List<CompletableFuture<String>> priceFuture = shops.stream()
+	            .map(shop -> CompletableFuture.supplyAsync( // 异步获取价格
+	                    () -> shop.getPrice2(product), executor ))
+	            .map(future -> future.thenApply(Quote::parse)) // 获取到价格后对价格解析
+	            .map(future -> future.thenCompose(quote -> CompletableFuture.supplyAsync( // 另一个异步任务构造异步应用报价
+	                                                        () -> Discount.applyDiscount(quote), executor)))
+	            .collect(Collectors.toList());
+
+	    return priceFuture.stream()
+	            .map(CompletableFuture::join) //join 操作和get操作有相同的含义，等待所有异步操作的结果。
+	            .collect(Collectors.toList());
+	}
+	
+	//如果两个异步操作是相互独立的
+	/*List<CompletableFuture<Double>> priceFuture = shops.stream()
+	        .map(shop -> CompletableFuture.supplyAsync( // 异步获取价格
+	                () -> shop.getPrice(product), executor))
+	        .map(future -> future.thenCombine(CompletableFuture.supplyAsync( // 异步获取折扣率
+	                () -> Discount.getRate(), executor)
+	                , (price, rate) -> price * rate)) // 将两个异步任务的结果合并
+	        .collect(Collectors.toList());
+	        */
+	//将两个独立的CompletableFutures组合，因为操作是并行的，任务也是并行的
+	
 	
 	
 	
@@ -75,6 +142,12 @@ public class Java8 {
 
 		public double getPrice(String product) {
 			return calculatePrice(product);
+		}
+		
+		public String getPrice2(String product){
+		    double price = calculatePrice(product);
+		    Discount.Code code = Discount.Code.values()[random.nextInt(Discount.Code.values().length)];
+		    return String.format("s%:%.2f:%s", name, price, code);
 		}
 		
 		//模拟调用方法执行延时

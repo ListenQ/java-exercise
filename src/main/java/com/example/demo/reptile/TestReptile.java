@@ -30,7 +30,7 @@ public class TestReptile{
 	
 	public static String strUrl = "https://m.wxccp33.com/v1/lottery/openResult?lotteryCode=1309&dataNum=180";
 	
-	public static boolean saveFlag = true;
+	public static boolean saveFlag = false;
 	
 	public static void main(String[] args) throws Exception {
 		long start = System.currentTimeMillis();
@@ -48,7 +48,7 @@ public class TestReptile{
 		if(StringUtils.isNotBlank(line)) {
 			JSONObject jsonObject = JSON.parseObject(line);
 			JSONArray jsonArray = jsonObject.getJSONArray("data");
-//					System.out.println(subList);
+			System.out.println(jsonArray);
 			if(saveFlag) {
 				Sqllink.saveToDb(jsonArray);
 			}
