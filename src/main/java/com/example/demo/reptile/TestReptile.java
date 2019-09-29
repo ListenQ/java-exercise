@@ -30,7 +30,7 @@ public class TestReptile{
 	
 	public static String strUrl = "https://m.wxccp33.com/v1/lottery/openResult?lotteryCode=1309&dataNum=180";
 	
-	public static boolean saveFlag = false;
+	public static boolean saveFlag = true;
 	
 	public static void main(String[] args) throws Exception {
 		long start = System.currentTimeMillis();
