@@ -63,7 +63,7 @@ public class TestD {
 //		String ss= "&#22899;&#31070;&#33410;&#36731;&#26494;get&radic;&#33459;&#24515;&#30340;&#31192;&#35776;&#65281;TF&#21475;&#32418;&#12289;&#31062;&#39532;&#40857;&#39321;&#27700;&#12289;LA MER&#30524;&#38684;&hellip;&hellip;&#22899;&#31070;&#30340;&#24515;&#24605;&#24110;&#20320;&#25720;&#36879;&#20102;&#65292;&#24555;&#36190;&#25105;&#65281;"; 
 //		System.out.println(StringEscapeUtils.unescapeHtml4(ss));
 		
-//		System.out.println("bqi_web".contains("fxh"));
+		System.out.println("bqi_web".contains("bqi"));
 		
 
 		String sss ="B123a##6g#鍒堕€犲晢c#浼樼瓑#71,妫夌嚎 A21-71234##7g#鍒堕€犲晢d#浼樼瓑#72";
