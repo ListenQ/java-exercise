@@ -47,6 +47,7 @@ public class TestAnalysis {
 			if(flag ==0) {
 				mapList = new ArrayList<>();
 			}
+			
 			//如果当前期与下期的不一致则记录
 			if(!curr.getDragonTiger().equals(next.getDragonTiger())  
 					&& ( i>0 && !curr.getDragonTiger().equals(up.getDragonTiger()))) {
@@ -84,6 +85,10 @@ public class TestAnalysis {
 		}
 		System.out.println(resultMap);
 		Sqllink.saveToDb(resultMap);
+	}
+	
+	private void analysisTigerDragon() {
+		
 	}
 	
 	
