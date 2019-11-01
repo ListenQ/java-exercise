@@ -28,7 +28,9 @@ public class DateTimeTest {
 //		System.out.println(parseDate(LocalDateTime.now()));
 //		System.out.println(getlastTransMinute(DateUtil.dataFormat(DateUtil.parseDate("2019-08-12 13:00:00"))));
 		
-		System.out.println(DateUtil.dataFormat(new Date(),"YYYY-MM-dd"));
+		String date = "2019-10-25";
+		String time = "10:14";
+		System.out.println(DateUtil.parseDate(String.format("%s %s", date,time),"yyyy-MM-dd HH:mm"));
 	}
 
 	public static Date parseDate(String formatDate) throws ParseException {

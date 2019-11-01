@@ -63,13 +63,13 @@ public class TestD {
 //		String ss= "&#22899;&#31070;&#33410;&#36731;&#26494;get&radic;&#33459;&#24515;&#30340;&#31192;&#35776;&#65281;TF&#21475;&#32418;&#12289;&#31062;&#39532;&#40857;&#39321;&#27700;&#12289;LA MER&#30524;&#38684;&hellip;&hellip;&#22899;&#31070;&#30340;&#24515;&#24605;&#24110;&#20320;&#25720;&#36879;&#20102;&#65292;&#24555;&#36190;&#25105;&#65281;"; 
 //		System.out.println(StringEscapeUtils.unescapeHtml4(ss));
 		
-		System.out.println("bqi_web".contains("bqi"));
+//		System.out.println("bqi_web".contains("bqi"));
 		
 
 		String sss ="B123a##6g#鍒堕€犲晢c#浼樼瓑#71,妫夌嚎 A21-71234##7g#鍒堕€犲晢d#浼樼瓑#72";
-		System.out.println(sss.split(",")[1].contains("#71"));
+//		System.out.println(sss.split(",")[1].contains("#71"));
 		String str = "452.00片";
-		System.out.println(str.substring(0,str.indexOf("片")));
+//		System.out.println(str.substring(0,str.indexOf("片")));
 
 		
 		List<Map<String, String>> list = new ArrayList<>();
@@ -81,7 +81,7 @@ public class TestD {
 		Stu stu = new TestD().new Stu();
 		stu.setName(list.stream().map(m ->m.get("batch_id")).findFirst().get());
 		stu.setNumber(list.stream().map(m ->m.get("sqrialno")).findFirst().get());
-		System.out.println(stu);
+//		System.out.println(stu);
 
 //		String units = "4#204.17";
 //		String[] strings = units.split(",");
@@ -102,16 +102,18 @@ public class TestD {
 //        System.out.println(new BigInteger(1, md.digest()).toString(16));
         short a = 128;
         byte b = (byte)a;
-        System.out.println(a+"**"+b);
+//        System.out.println(a+"**"+b);
         //Z5q4dKWQy77vfnUd0TjIOuYl0BIcKSBl4t4CoDEFrM4
         String head = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9";
         String content = "eyJleHAiOjE1NjM1MzU2NTcsInVzZXJfbmFtZSI6IjEzNDgwMDQiLCJqdGkiOiJmODFjNGI4YS0wZDM5LTQ3MmYtOWVjMi1iZDgzOWY2OGIyMGQiLCJjbGllbnRfaWQiOiJ4aF93ZWIiLCJzY29wZSI6WyJzZXJ2ZXIiXX0";
         byte[] decode = Base64.getDecoder().decode(head);
         byte[] decode2 = Base64.getDecoder().decode(content);
-        System.out.println(new String(decode,"UTF-8")+","+new String(decode2,"UTF-8"));
+//        System.out.println(new String(decode,"UTF-8")+","+new String(decode2,"UTF-8"));
         String secret = "XHM@9e7eKW1xyj@!r&fy";
-        System.out.println(Tools.HMACSHA256(head+"."+content, secret));
+//        System.out.println(Tools.HMACSHA256(head+"."+content, secret));
         
+        String s = "20191231";
+        System.out.println(s.startsWith("1231", 4));
         
 	}
 	

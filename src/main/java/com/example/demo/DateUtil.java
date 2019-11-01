@@ -40,6 +40,13 @@ public class DateUtil {
     	return dataFormat(date);
     }
     
+    public static Date parseDate(String formatDate, String format) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(format);
+        LocalDateTime localDateTime = LocalDateTime.parse(formatDate, dateTimeFormatter);
+        Instant instant = localDateTime.atZone(ZoneId.systemDefault()).toInstant();
+        return Date.from(instant);
+    }
+    
     public static LocalDateTime parseLocalDateTime(Date date) {
     	return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
     }
