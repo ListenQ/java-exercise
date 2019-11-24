@@ -1,5 +1,7 @@
 package com.example.demo.web;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Future;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.async.Task;
+import com.example.demo.cp.TestDto;
 
 @RestController
 public class HelloController {
@@ -26,6 +29,15 @@ public class HelloController {
 		Future<Object> one11 = task.doTaskOne11();
 		System.out.println(one11.get());
 		return map;
+	}
+	
+	@RequestMapping("/test")
+	public Object test() {
+		TestDto test= new TestDto();
+		test.setName("xixi");
+		test.setNumber(new BigDecimal(1.00));
+		test.setDate(new Date());
+		return test;
 	}
 	
 
