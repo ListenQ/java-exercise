@@ -11,8 +11,15 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class DateTimeTest {
+	
 
 	private static final DateTimeFormatter DEFAULT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	
+	private static final String s = new String("123");
+	private static final String ss;
+	static {
+		ss = new String("465");
+	}
 
 	public static void main(String[] args) throws ParseException {
 		// System.out.println(parseDate("2019-08-07 12:23:54"));
@@ -30,7 +37,10 @@ public class DateTimeTest {
 		
 		String date = "2019-10-25";
 		String time = "10:14";
-		System.out.println(DateUtil.parseDate(String.format("%s %s", date,time),"yyyy-MM-dd HH:mm"));
+//		System.out.println(DateUtil.parseDate(String.format("%s %s", date,time),"yyyy-MM-dd HH:mm"));
+		
+		System.out.println(DateTimeTest.s.hashCode());
+		System.out.println(DateTimeTest.s.hashCode());
 	}
 
 	public static Date parseDate(String formatDate) throws ParseException {

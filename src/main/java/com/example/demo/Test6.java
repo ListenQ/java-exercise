@@ -36,6 +36,7 @@ public class Test6 {
 			Map.Entry<Integer, List<Person>> persons = (Map.Entry) it.next();
 			System.out.println("Age " + persons.getKey() + " = " + persons.getValue());
 		}
+		
 	}
 	
 	static class Person{
