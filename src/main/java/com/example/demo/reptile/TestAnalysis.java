@@ -27,7 +27,7 @@ public class TestAnalysis {
 	private static final String sql = "select * from t_lucky where issue like ? order by issue asc";
 	
 	public static void main(String[] args) throws SQLException, IOException {
-		ResultSet rs = BaseDao.getExecuteQuery(sql,new String [] {"20191025%"});
+		ResultSet rs = BaseDao.getExecuteQuery(sql,new String [] {"20191114%"});
 		List<Lucky> list = new ArrayList<>();
 		while(rs.next()) {
 			Lucky lucky = new Lucky(rs.getInt(1), 

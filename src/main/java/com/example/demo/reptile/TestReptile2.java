@@ -28,14 +28,14 @@ public class TestReptile2{
 		long start = System.currentTimeMillis();
 		
 		String line = HttpClientUtil.sendHttpGet(strUrl);
-		System.err.println("耗时:"+(System.currentTimeMillis() - start));
+		System.out.println("耗时:"+(System.currentTimeMillis() - start));
 		
 		if(StringUtils.isNotBlank(line)) {
 			JSONObject jsonObject = JSON.parseObject(line);
 			JSONArray jsonArray = jsonObject.getJSONArray("bodyList");
 			System.out.println("过滤前数据:\n"+jsonArray);
 			JSONArray filter2 = filter2(jsonArray);
-			System.out.println(filter2);
+			System.out.println("过滤后数据:\n"+filter2);
 			if(saveFlag) {
 				Sqllink.saveToDb(jsonArray);
 			}
@@ -48,7 +48,7 @@ public class TestReptile2{
 			JSONObject json = (JSONObject)iterator.next();
 			if(json ==null || json.isEmpty()) {
 				iterator.remove();
-			}else if (!json.getString("issue").contains("20191010")){
+			}else if (!json.getString("issue").contains("20191120")){
 				iterator.remove();
 			}
 		}
