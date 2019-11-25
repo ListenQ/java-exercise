@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -9,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import com.example.demo.Test6.Person;
 
 public class Test6 {
 
@@ -36,6 +39,12 @@ public class Test6 {
 			Map.Entry<Integer, List<Person>> persons = (Map.Entry) it.next();
 			System.out.println("Age " + persons.getKey() + " = " + persons.getValue());
 		}
+		
+		list.sort(Comparator.comparing(Person::getAge).reversed());
+		Integer total = list.subList(3, list.size()).parallelStream().map(Person::getAge).reduce(0,Integer::sum);
+		List<Person> subList = list.subList(0, 3);
+		subList.add(new Person("其他之和", "sdfssd", total));
+		System.out.println(subList);
 	}
 	
 	static class Person{
@@ -68,7 +77,8 @@ public class Test6 {
 		}
 		@Override
 		public String toString() {
-			return "Person [name=" + name + ", pwd=" + pwd + "]";
+			return "Person [name=" + name + ", pwd=" + pwd + ", age=" + age + "]";
 		}
+		
 	}
 }

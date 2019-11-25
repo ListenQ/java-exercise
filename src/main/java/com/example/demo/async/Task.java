@@ -12,7 +12,7 @@ import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
 
 /**
- * 异步调用
+ * 异步调用  @Async所修饰的函数不要定义为static类型，这样异步调用不会生效
  * Task<BR>
  * 创建人：zhangqi <BR>
  * 时间：2019年1月31日-下午3:09:32 <BR>
@@ -87,21 +87,37 @@ public class Task {
 	public Future<Object> doTaskOne2() throws Exception {
 		System.out.println("开始做任务2");
 		long start = System.currentTimeMillis();
-		Thread.sleep(random.nextInt(10000));
-		Thread.sleep(random.nextInt(10000));
-		Thread.sleep(random.nextInt(10000));
+		haoshi();
+		System.out.println("111");
+		haoshi();
+		System.out.println("222");
+		haoshi();
 		System.out.println("完成调用2，耗时：" + (System.currentTimeMillis() - start) + "毫秒");
 		return new AsyncResult<Object>("任务2的结果");
 	}
 	
-	public Future<Object> doTaskOne3() throws Exception {
+	public Object doTaskOne3() throws Exception {
 		System.out.println("开始做任务3");
 		long start = System.currentTimeMillis();
-		Thread.sleep(random.nextInt(10000));
-		Thread.sleep(random.nextInt(10000));
-		Thread.sleep(random.nextInt(10000));
+		Future<Object> haoshi = haoshi();
+		Future<Object> haoshi2 = haoshi();
+		Future<Object> haoshi3 = haoshi();
+		System.out.println("结果是:"+haoshi.get()+haoshi2.get()+haoshi3.get());
 		System.out.println("完成调用3，耗时：" + (System.currentTimeMillis() - start) + "毫秒");
-		return new AsyncResult<Object>("任务3的结果");
+		return "任务3的结果";
+	}
+	
+	public String test() throws Exception {
+		System.out.println("开始做任务test");
+		long start = System.currentTimeMillis();
+		Future<Object> haoshi = haoshi();
+		System.out.println("111");
+		Future<Object> haoshi2 = haoshi();
+		System.out.println("222");
+		Future<Object> haoshi3 = haoshi();
+		System.out.println("结果是:"+haoshi.get()+haoshi2.get()+haoshi3.get());
+		System.out.println("完成调用test，耗时：" + (System.currentTimeMillis() - start) + "毫秒");
+		return "任务3的结果";
 	}
 	
 	
@@ -123,6 +139,12 @@ public class Task {
         System.out.println("完成任务三，耗时：" + (end - start) + "毫秒");
         return new AsyncResult<>("任务三完成");
     }
+	
+	@Async
+	public Future<Object> haoshi() throws InterruptedException {
+		Thread.sleep(2000);
+		return new AsyncResult<>("返回结果");
+	}
 	
 
 }
