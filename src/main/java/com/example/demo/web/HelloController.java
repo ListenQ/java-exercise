@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Future;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -57,7 +58,8 @@ public class HelloController {
 		test.setName("xixi");
 		test.setNumber(new BigDecimal(1.00));
 		test.setDate(new Date());
-		return test;
+		JSONObject json = new JSONObject(test);
+		return json.toString();
 	}
 	
 

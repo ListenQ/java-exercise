@@ -35,11 +35,19 @@ public class Test6 {
 			System.out.println("Age " + persons.getKey() + " = " + persons.getValue());
 		}
 		
+		//根据条件分组
+		Map<Boolean, List<Person>> collect = list.parallelStream().collect(Collectors.groupingBy(e ->fetchGroupByKey(e)));
+		System.out.println("条件分组:"+collect.get(false));
+		
 		list.sort(Comparator.comparing(Person::getAge).reversed());
 		Integer total = list.subList(3, list.size()).parallelStream().map(Person::getAge).reduce(0,Integer::sum);
 		List<Person> subList = list.subList(0, 3);
 		subList.add(new Person("其他之和", "sdfssd", total));
 		System.out.println(subList);
+	}
+	
+	private static boolean fetchGroupByKey(Person person) {
+		return person.getAge() > 20;
 	}
 	
 	static class Person{

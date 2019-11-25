@@ -88,6 +88,11 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.58</version>
 		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20160810</version>
+		</dependency>
 		<!-- 爬虫 -->
 		<dependency>
 			<groupId>us.codecraft</groupId>
