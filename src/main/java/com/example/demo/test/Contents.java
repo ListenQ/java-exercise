@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.test;
 
 public interface Contents {
 	

@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.test;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

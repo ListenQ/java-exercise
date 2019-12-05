@@ -34,12 +34,11 @@ public class HelloController {
 	
 	@RequestMapping("/hello2")
 	public Object index2() throws Exception{
+		long start = System.currentTimeMillis();
 		Map<String, Object> map =new HashMap<>();
-		map.put("isLiked", true);
-		map.put("is_liked", true);
 		Future<Object> one2 = task.doTaskOne2();
 		map.put("one",one2.get());
-		System.out.println(one2.get());
+		System.out.println((System.currentTimeMillis()-start)+"s"+one2.get());
 		return map;
 	}
 	
@@ -60,6 +59,16 @@ public class HelloController {
 		test.setDate(new Date());
 		JSONObject json = new JSONObject(test);
 		return json.toString();
+	}
+	
+	@RequestMapping("/test3")
+	public Object test3() throws Exception {
+		Map<String, Object> map =new HashMap<>();
+		long start = System.currentTimeMillis();
+		Object one2 = task.doTaskOne3();
+		map.put("one",one2);
+		System.out.println((System.currentTimeMillis()-start)+"s"+one2);
+		return map;
 	}
 	
 

@@ -86,36 +86,32 @@ public class Task {
 	@Async
 	public Future<Object> doTaskOne2() throws Exception {
 		System.out.println("开始做任务2");
-		long start = System.currentTimeMillis();
 		haoshi();
 		System.out.println("111");
 		haoshi();
 		System.out.println("222");
 		haoshi();
-		System.out.println("完成调用2，耗时：" + (System.currentTimeMillis() - start) + "毫秒");
 		return new AsyncResult<Object>("任务2的结果");
 	}
 	
 	public Object doTaskOne3() throws Exception {
 		System.out.println("开始做任务3");
-		long start = System.currentTimeMillis();
-		Future<Object> haoshi = haoshi();
-		Future<Object> haoshi2 = haoshi();
-		Future<Object> haoshi3 = haoshi();
-		System.out.println("结果是:"+haoshi.get()+haoshi2.get()+haoshi3.get());
-		System.out.println("完成调用3，耗时：" + (System.currentTimeMillis() - start) + "毫秒");
-		return "任务3的结果";
+		Future<Object> haoshi1 = haoshi2();
+		Future<Object> haoshi2 = haoshi2();
+		Future<Object> haoshi23 = haoshi2();
+		return haoshi1.get().toString()+haoshi2.get()+haoshi23.get();
 	}
 	
+	@Async
 	public String test() throws Exception {
 		System.out.println("开始做任务test");
 		long start = System.currentTimeMillis();
-		Future<Object> haoshi = haoshi();
+		Object haoshi = haoshi();
 		System.out.println("111");
-		Future<Object> haoshi2 = haoshi();
+		Object haoshi2 = haoshi();
 		System.out.println("222");
-		Future<Object> haoshi3 = haoshi();
-		System.out.println("结果是:"+haoshi.get()+haoshi2.get()+haoshi3.get());
+		Object haoshi3 = haoshi();
+		System.out.println("结果是:"+haoshi+haoshi2+haoshi3);
 		System.out.println("完成调用test，耗时：" + (System.currentTimeMillis() - start) + "毫秒");
 		return "任务3的结果";
 	}
@@ -141,7 +137,14 @@ public class Task {
     }
 	
 	@Async
-	public Future<Object> haoshi() throws InterruptedException {
+	public Object haoshi() throws InterruptedException {
+		Thread.sleep(2000);
+		return "返回结果";
+	}
+	
+	
+	@Async
+	public Future<Object> haoshi2() throws InterruptedException {
 		Thread.sleep(2000);
 		return new AsyncResult<>("返回结果");
 	}

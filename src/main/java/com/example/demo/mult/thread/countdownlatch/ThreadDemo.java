@@ -1,11 +1,8 @@
 package com.example.demo.mult.thread.countdownlatch;
 
-import java.text.ParseException;
-import java.util.Date;
-import java.util.List;
 import java.util.concurrent.Callable;
 
-import com.example.demo.DateTimeTest;
+import com.example.demo.test.DateTimeTest;
 
 public class ThreadDemo implements Callable<String>{
 	
