@@ -10,7 +10,8 @@ import java.util.Date;
 
 public class DateUtil {
 
-	private static final DateTimeFormatter DEFAULT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	public static final DateTimeFormatter DEFAULT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	public static final DateTimeFormatter DEFAULT_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public static String dataFormat(Date date) {
     	Instant instant = date.toInstant();
@@ -47,6 +48,12 @@ public class DateUtil {
         return Date.from(instant);
     }
     
+    public static Date parseDate(String formatDate, DateTimeFormatter format) {
+        LocalDateTime localDateTime = LocalDateTime.parse(formatDate, format);
+        Instant instant = localDateTime.atZone(ZoneId.systemDefault()).toInstant();
+        return Date.from(instant);
+    }
+    
     public static LocalDateTime parseLocalDateTime(Date date) {
     	return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
     }
@@ -68,6 +75,11 @@ public class DateUtil {
         LocalDateTime localDateTime = LocalDateTime.of(LocalDate.now(),localTime);
 		Instant instant = localDateTime.atZone(ZoneId.systemDefault()).toInstant();
         return Date.from(instant);
+    }
+    
+    public static Date getUsTime() {
+    	LocalDateTime localDateTime  = LocalDateTime.now();
+    	return Date.from(localDateTime.atZone(ZoneId.of("America/New_York")).toInstant());
     }
     
 }

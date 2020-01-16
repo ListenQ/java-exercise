@@ -7,13 +7,17 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.IntStream;
 
 public class DateTimeTest {
 	
 
 	private static final DateTimeFormatter DEFAULT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	private static final DateTimeFormatter DEFAULT_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	
 	private static final String s = new String("123");
 	private static final String ss;
@@ -35,13 +39,35 @@ public class DateTimeTest {
 //		System.out.println(parseDate(LocalDateTime.now()));
 //		System.out.println(getlastTransMinute(DateUtil.dataFormat(DateUtil.parseDate("2019-08-12 13:00:00"))));
 		
-		String date = "2019-10-25";
-		String time = "10:14";
+//		String date = "2019-10-25";
+//		String time = "10:14";
 //		System.out.println(DateUtil.parseDate(String.format("%s %s", date,time),"yyyy-MM-dd HH:mm"));
 		
-		System.out.println(DateTimeTest.s.hashCode());
-		System.out.println(DateTimeTest.s.hashCode());
+//		System.out.println(LocalTime.of(16, 15)+"**"+LocalTime.now());
+//		System.out.println(LocalTime.now().compareTo(LocalTime.of(16, 15))>0);
+		
+//		System.out.println(dataFormat(new Date(), ZoneId.of("America/New_York")));
+//		System.out.println(new Date().getTime());
+//		System.out.println(DateFormatUtils.format(1578432120000l, "yyyy-MM-dd HH:mm:ss"));
+		List<Integer> list = new ArrayList<Integer>();
+		list.add(LocalDate.now().getYear());
+		getList(3,LocalDate.now().getYear(),list);
+		System.out.println(list);
 	}
+	
+	private static void getList(int num,int year,List<Integer> list){
+		if(num == 0) return ;
+		list.add(--year);
+		getList(--num,year,list);
+	}
+	
+	
+	
+	 public static Date parse(String dateStr, String pattern) {
+        LocalDateTime localDateTime = LocalDateTime.parse(dateStr, DateTimeFormatter.ofPattern(pattern));
+        Instant instant = localDateTime.atZone(ZoneId.systemDefault()).toInstant();
+        return Date.from(instant);
+    }
 
 	public static Date parseDate(String formatDate) throws ParseException {
 		LocalDateTime localDateTime = LocalDateTime.parse(formatDate, DEFAULT_DATETIME_FORMAT);
@@ -54,7 +80,18 @@ public class DateTimeTest {
 		LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
 		return localDateTime.format(DEFAULT_DATETIME_FORMAT);
 	}
-
+	
+	public static String dataFormat(Date date,ZoneId zoneId) {
+		Instant instant = date.toInstant();
+		LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zoneId);
+		return localDateTime.format(DEFAULT_DATETIME_FORMAT);
+	}
+	
+	public static Date getUsTime() {
+    	LocalDateTime localDateTime  = LocalDateTime.now();
+    	return Date.from(localDateTime.atZone(ZoneId.of("America/New_York")).toInstant());
+    }
+	
 	public static Date getZeroTime() {
 		LocalDateTime localDateTime = LocalDateTime.of(LocalDate.now().minusDays(-1), LocalTime.MIN);
 		Instant instant = localDateTime.atZone(ZoneId.systemDefault()).toInstant();

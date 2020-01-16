@@ -43,6 +43,21 @@ public class TestDto {
 		this.date = date;
 	}
 	
+	public TestDto() {}
+
+	public TestDto(String name, Date date, BigDecimal number) {
+		super();
+		this.name = name;
+		this.date = date;
+		this.number = number;
+	}
+
+	@Override
+	public String toString() {
+		return "TestDto [name=" + name + ", date=" + date + ", number=" + number + "]";
+	}
+	
+	
 	
 
 }
