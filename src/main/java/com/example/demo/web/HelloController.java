@@ -54,15 +54,6 @@ public class HelloController {
 		return map;
 	}
 	
-	@RequestMapping("/test2")
-	public Object test2() {
-		TestDto test= new TestDto();
-		test.setName("xixi");
-		test.setNumber(new BigDecimal(1.00));
-		test.setDate(new Date());
-		JSONObject json = new JSONObject(test);
-		return json.toString();
-	}
 	
 	@RequestMapping("/test3")
 	public Object test3() throws Exception {
