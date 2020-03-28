@@ -7,6 +7,14 @@ import java.util.concurrent.RecursiveTask;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * fork/join 测试
+ * EncryptTask<BR>
+ * 创建人：zhangqi <BR>
+ * 时间：2020年2月19日-下午4:38:27 <BR>
+ * @version 1.0.0
+ * 
+ */
 public class EncryptTask extends RecursiveTask<List<User>>{
 	
 	private static final PasswordEncoder ENCODER = new BCryptPasswordEncoder();
