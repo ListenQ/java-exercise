@@ -1,20 +1,21 @@
 package com.example.demo.web;
 
-import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.concurrent.Future;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.async.Task;
-import com.example.demo.cp.TestDto;
 import com.example.demo.test.DateTimeTest;
 
 @RestController
@@ -67,7 +68,7 @@ public class HelloController {
 	
 	
 	@GetMapping("/time")
-	public Object testTime() {
+	public Object testTime(String dateStr) throws ParseException {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		Date date = new Date();
@@ -75,8 +76,22 @@ public class HelloController {
 		System.out.println("美国纽约时间:"+DateTimeTest.dataFormat(date,ZoneId.of("America/New_York")));
 		map.put("date", date);
 		
+		
+		String dataFormat = DateTimeTest.dataFormat(date, ZoneId.of("Asia/Shanghai"));
+		System.err.println(dataFormat);
+		
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		format.setTimeZone(TimeZone.getTimeZone(ZoneId.of("Asia/Shanghai")));
+		String str= format.format(new Date(date.getTime()));
+		
+		
+		System.err.println(str);
+		
+		
+		
         return map;
 	}
+	
 	
 
 }

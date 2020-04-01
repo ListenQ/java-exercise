@@ -74,11 +74,11 @@ public class DateTimeTest {
 		Instant instant = localDateTime.atZone(ZoneId.systemDefault()).toInstant();
 		return Date.from(instant);
 	}
-
-	public static String dataFormat(Date date) {
-		Instant instant = date.toInstant();
-		LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
-		return localDateTime.format(DEFAULT_DATETIME_FORMAT);
+	
+	public static Date parseDate(String formatDate,ZoneId zondId) throws ParseException {
+		LocalDateTime localDateTime = LocalDateTime.parse(formatDate, DEFAULT_DATETIME_FORMAT);
+		Instant instant = localDateTime.atZone(zondId).toInstant();
+		return Date.from(instant);
 	}
 	
 	public static String dataFormat(Date date,ZoneId zoneId) {
@@ -86,6 +86,15 @@ public class DateTimeTest {
 		LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zoneId);
 		return localDateTime.format(DEFAULT_DATETIME_FORMAT);
 	}
+
+	public static String dataFormat(Date date) {
+		Instant instant = date.toInstant();
+		LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+		return localDateTime.format(DEFAULT_DATETIME_FORMAT);
+	}
+	
+	
+	
 	
 	public static Date getUsTime() {
     	LocalDateTime localDateTime  = LocalDateTime.now();

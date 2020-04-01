@@ -3,50 +3,55 @@ package com.example.demo.test;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Test8 {
 	
 	public static void main(String[] args) throws Exception {
-		List<String> list= new ArrayList<>();
-		list.add(null);
-		list.add("asdf");
-		list.add("sadfa");
-//		list.stream().map(ll ->{return "";}).collect(Collectors.toList());
-		List<String> l = new ArrayList<String>();
-		
-		List<String> collect = IntStream.range(0, list.size()).mapToObj(ll ->{
-			return list.get(ll);
-		}).collect(Collectors.toList());
-
-		BigDecimal d1 = null;
-		BigDecimal d2  = new BigDecimal("10.2");
-//		System.out.println(d2.add(d1==null?BigDecimal.ZERO:d1));
-//		System.out.println((d1==null?BigDecimal.ZERO:d1).add(d2));
-		
 		List<User> lists = new ArrayList<Test8.User>();
 		User user = new User();
 		user.setName("aaa");
-		user.setAmount(new BigDecimal("2110.00"));
+		user.setAmount(new BigDecimal("0.6"));
 		lists.add(user);
 		user = new User();
-		user.setName("aaa");
-		user.setAmount(new BigDecimal("2110.00"));
+		user.setName("bbbb");
+		user.setAmount(new BigDecimal("1210.00"));
 		lists.add(user);
 		
-		Map<User, User> map = lists.parallelStream().collect(Collectors.toMap(u ->u, u->u));
-		map.forEach((k,v)->{
-			System.out.println(v);
+		user = new User();
+		user.setName("cccccc");
+		user.setAmount(new BigDecimal("45.014"));
+		lists.add(user);
+		
+//		lists.sort(Comparator.comparing(Test8.User::getAmount,Comparator.nullsFirst(BigDecimal::compareTo)).reversed());
+		
+		lists.parallelStream().forEach(l->{
+			List<User> newList = lists;
+			newList = newList.stream().sorted(Comparator.comparing(User::getAmount).reversed()).limit(1*3).collect(Collectors.toList());
+			System.out.println("lists.sort:"+newList);
 		});
-		Set<User> s = new HashSet<User>(lists);
-		for (User user2 : s) {
-			System.out.println(user2.hashCode());
-		}
+		
+		
+		
+//		List<User> collect = lists.stream().sorted(Comparator.comparing(User::getAmount).reversed()).limit(1*2).collect(Collectors.toList());
+//		System.out.println(collect);
+		/*BigDecimal total = lists.stream().filter(lll ->{
+			if(lll.getAmount() == null) {
+				System.out.printf("数据为空:%s", lll);
+			}return lll.getAmount()!=null;
+		}).map(ll ->ll.getAmount().add(BigDecimal.TEN)).reduce(BigDecimal.ZERO,BigDecimal::add);*/
+		
+//		Set<User> s = new HashSet<User>(lists);
+//		for (User user2 : s) {
+//			System.out.println(user2);
+//		}
+		
+		
 	}
 	
 	static class User{
