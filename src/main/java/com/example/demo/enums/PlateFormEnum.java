@@ -7,6 +7,14 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.example.demo.cp.Lucky;
 
+/**
+ * 采用枚举处理多if条件判断
+ * PlateFormEnum<BR>
+ * 创建人：zhangqi <BR>
+ * 时间：2020年4月2日-下午11:10:28 <BR>
+ * @version 1.0.0
+ * 
+ */
 public enum PlateFormEnum {
 	
 	/**
