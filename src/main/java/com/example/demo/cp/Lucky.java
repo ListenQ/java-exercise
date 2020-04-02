@@ -16,6 +16,7 @@ public class Lucky implements Serializable{
 	private String bigSmall;
 	private Integer tenantCode;
 	private Date createTime;
+	private String type;
 	
 	public Lucky() {}
 	
@@ -33,6 +34,13 @@ public class Lucky implements Serializable{
 		this.tenantCode = tenantCode;
 		this.createTime = createTime;
 	}
+	
+	
+	public Lucky(String type) {
+		super();
+		this.type = type;
+	}
+
 	public Integer getLotteryCode() {
 		return lotteryCode;
 	}
@@ -54,6 +62,14 @@ public class Lucky implements Serializable{
 	public String getOpenTime() {
 		return openTime;
 	}
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	public void setOpenTime(String openTime) {
 		this.openTime = openTime;
 	}
