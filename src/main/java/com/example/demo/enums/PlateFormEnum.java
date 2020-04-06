@@ -43,6 +43,7 @@ public enum PlateFormEnum {
 	
 	private final String value;
 	// 定义一个静态map 加载类时首先既初始化，执行步骤一
+	// 或者使用便利方法
     private static Map<String, PlateFormEnum> map = new HashMap<>();
 	
     /**
@@ -52,6 +53,14 @@ public enum PlateFormEnum {
         for (PlateFormEnum demo : PlateFormEnum.values()) {
             map.put(demo.getValue(), demo);
         }
+    }
+    public static PlateFormEnum getPlateFormEnum(String plate) {
+    	for (PlateFormEnum p : PlateFormEnum.values()) {
+			if(p.getValue().equals(plate)) {
+				return p;
+			}
+		}
+    	return null;
     }
     
     
