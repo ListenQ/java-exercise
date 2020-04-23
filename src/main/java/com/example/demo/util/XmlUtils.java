@@ -287,12 +287,13 @@ public class XmlUtils {
 	 *                [违例类型] [违例说明]
 	 * @see [类、类#方法、类#成员]
 	 */
-	public static Object fromXml(String xml, Class<?> rootClass) {
-		Object obj = null;
+	@SuppressWarnings("unchecked")
+	public static <T> T fromXml(String xml, Class<T> rootClass) {
+		T obj = null;
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(rootClass);
 			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-			obj = unmarshaller.unmarshal(new StringReader(xml));
+			obj = (T) unmarshaller.unmarshal(new StringReader(xml));
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
