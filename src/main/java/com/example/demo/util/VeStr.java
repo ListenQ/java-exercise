@@ -42,8 +42,6 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
 
 public class VeStr {
 	
@@ -1216,40 +1214,40 @@ public class VeStr {
 		return outStr;
 	}
 
-	public static String encodeBase64(String s, String encode) {
-		if (s == null)
-			return null;
-		if (StringUtils.isBlank(encode)) {
-			encode = "UTF-8";
-		}
-		BASE64Encoder en64 = new BASE64Encoder();
-		byte[] b = null;
-		try {
-			b = s.getBytes(encode);
-			return en64.encode(b);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
+//	public static String encodeBase64(String s, String encode) {
+//		if (s == null)
+//			return null;
+//		if (StringUtils.isBlank(encode)) {
+//			encode = "UTF-8";
+//		}
+//		BASE64Encoder en64 = new BASE64Encoder();
+//		byte[] b = null;
+//		try {
+//			b = s.getBytes(encode);
+//			return en64.encode(b);
+//		} catch (UnsupportedEncodingException e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+//	}
 
-	public static String decodeBase64(String s, String encode) {
-		if (s == null)
-			return null;
-		if (StringUtils.isBlank(encode)) {
-			encode = "UTF-8";
-		}
-		BASE64Decoder de64 = new BASE64Decoder();
-
-		byte[] cc;
-		try {
-			cc = de64.decodeBuffer(s);
-			return new String(cc, encode);
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
+//	public static String decodeBase64(String s, String encode) {
+//		if (s == null)
+//			return null;
+//		if (StringUtils.isBlank(encode)) {
+//			encode = "UTF-8";
+//		}
+//		BASE64Decoder de64 = new BASE64Decoder();
+//
+//		byte[] cc;
+//		try {
+//			cc = de64.decodeBuffer(s);
+//			return new String(cc, encode);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+//	}
 
 	/**
 	 * 从城市的list map中取一个编号相同的map
