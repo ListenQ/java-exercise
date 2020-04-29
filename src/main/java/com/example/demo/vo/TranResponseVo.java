@@ -1,6 +1,7 @@
 package com.example.demo.vo;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -13,9 +14,9 @@ public class TranResponseVo {
 	
 	private String tran_type;
 	
-	private String date;
+	private Date date;
 	
-	private String sett_date;
+	private Date sett_date;
 	
 	private String ccy;
 	
