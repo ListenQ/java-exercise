@@ -39,6 +39,10 @@ public class Test6 {
 		Map<Boolean, List<Person>> collect = list.parallelStream().collect(Collectors.groupingBy(e ->fetchGroupByKey(e)));
 		System.out.println("条件分组:"+collect.get(false));
 		
+		//List 转为 Map<k,v>
+		Map<String, Person> collect2 = list.stream().collect(Collectors.toMap(Person::getName, p -> p));
+		System.out.println("转map对象："+collect2);
+		
 		list.sort(Comparator.comparing(Person::getAge).reversed());
 		Integer total = list.subList(3, list.size()).parallelStream().map(Person::getAge).reduce(0,Integer::sum);
 		List<Person> subList = list.subList(0, 3);
