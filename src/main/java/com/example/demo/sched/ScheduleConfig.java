@@ -10,8 +10,6 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 /**
  * 定时任务的线程池配置
  * 
- * @author shenyangkun
- * @date 2020/4/29
  **/
 @Configuration
 @EnableAsync
