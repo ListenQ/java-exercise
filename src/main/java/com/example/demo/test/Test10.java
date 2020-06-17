@@ -1,5 +1,6 @@
 package com.example.demo.test;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +33,7 @@ public class Test10 {
 		// 替换orElse 就会返回null
 		Map<String, String> string = list.stream().filter(l-> l.get("batch_id").equals("123")).findFirst().orElse(null);
 		System.out.println(string);
+		
 	}
 
 }
