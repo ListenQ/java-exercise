@@ -16,8 +16,8 @@ public class TestScheduled2 {
 	
 	
 	
-    @Async
-    @Scheduled(fixedDelay = 2000)
+//    @Async
+   // @Scheduled(fixedDelay = 2000)
     public void stockDataPush() throws InterruptedException {
     	Thread.sleep(2500l);
        log.info(Thread.currentThread().getName()+"执行了2");

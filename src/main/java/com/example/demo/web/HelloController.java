@@ -11,17 +11,24 @@ import java.util.TimeZone;
 import java.util.concurrent.Future;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.async.Task;
+import com.example.demo.listener.Demo2Event;
+import com.example.demo.listener.Demo3Event;
+import com.example.demo.listener.DemoEvent;
 import com.example.demo.test.DateTimeTest;
 
 @RestController
 public class HelloController {
 	@Autowired
 	private Task task;
+	
+    @Autowired
+    private ApplicationContext context;
 	
 	@RequestMapping("/hello")
 	public Object index() throws Exception{
@@ -64,6 +71,24 @@ public class HelloController {
 		map.put("one",one2);
 		System.out.println((System.currentTimeMillis()-start)+"s"+one2);
 		return map;
+	}
+	
+	@RequestMapping("/publish")
+	public Object listen(String message) {
+		context.publishEvent(new DemoEvent(this, message));
+		return "success";
+	}
+	
+	@RequestMapping("/publish2")
+	public Object listen2(String message) {
+		context.publishEvent(new Demo2Event(this, message));
+		return "success";
+	}
+	
+	@RequestMapping("/publish3")
+	public Object listen3(String message) {
+		context.publishEvent(new Demo3Event(this, message));
+		return "success";
 	}
 	
 	
