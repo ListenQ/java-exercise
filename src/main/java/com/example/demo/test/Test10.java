@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.LongAdder;
 import java.util.stream.Collectors;
 
 import com.example.demo.cp.Lucky;
@@ -14,10 +15,13 @@ public class Test10 {
 	
 	private static List<HashMap<String, String>> list = new ArrayList<>();
 	
+	private static LongAdder count = new LongAdder();
+	
 	public static void main(String[] args) {
 //		Lucky lucky = new Lucky("1");
 //		PlateFormEnum.getMethodByType(lucky.getType()).settCase(lucky);
 		
+		count.increment();
 		
 		System.out.println("HKD".contains("hk".toUpperCase()));
 		
@@ -34,6 +38,12 @@ public class Test10 {
 		Map<String, String> string = list.stream().filter(l-> l.get("batch_id").equals("123")).findFirst().orElse(null);
 		System.out.println(string);
 		
+		
+		count.increment();
+		
+		System.out.println(count.sumThenReset());
+		System.out.println(count.sum());
+		System.out.println(count.intValue());
 	}
 
 }
