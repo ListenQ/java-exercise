@@ -1,6 +1,7 @@
 package com.example.demo.listener;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -28,6 +29,7 @@ public class DemoListener {
 	@EventListener(classes= {Demo2Event.class})
 	public void listener2Event(Demo2Event event2) throws IOException {
 		log.info("event2监听来了{}",event2.getMessage());
+		log.info("event2监听来了{}",Arrays.toString(new Integer[] {1,2,3,4}));
 		listenerHandler(1);
 	}
 	
