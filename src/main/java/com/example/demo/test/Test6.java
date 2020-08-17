@@ -50,6 +50,9 @@ public class Test6 {
 		System.out.println(subList);
 	}
 	
+	/**
+	 * 必须为静态的方法
+	 */
 	private static boolean fetchGroupByKey(Person person) {
 		return person.getAge() > 20;
 	}
