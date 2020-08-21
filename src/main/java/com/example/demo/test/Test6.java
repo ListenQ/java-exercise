@@ -39,9 +39,13 @@ public class Test6 {
 		Map<Boolean, List<Person>> collect = list.parallelStream().collect(Collectors.groupingBy(e ->fetchGroupByKey(e)));
 		System.out.println("条件分组:"+collect.get(false));
 		
-		//List 转为 Map<k,v>
+		//List 转为 Map<k,v> key重复会出现IllegalStateException异常
 		Map<String, Person> collect2 = list.stream().collect(Collectors.toMap(Person::getName, p -> p));
 		System.out.println("转map对象："+collect2);
+		
+		//List 转为 Map<k,v> key重复不会出异常，后者覆盖前者
+		Map<String, Person> collect3 = list.stream().collect(Collectors.toMap(Person::getName, p -> p , (p1,p2) -> p2));
+		System.out.println("转map对象："+collect3);
 		
 		list.sort(Comparator.comparing(Person::getAge).reversed());
 		Integer total = list.subList(3, list.size()).parallelStream().map(Person::getAge).reduce(0,Integer::sum);
