@@ -1,14 +1,22 @@
 package com.example.demo.test;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import cn.hutool.core.util.NumberUtil;
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 
 public class Test12 {
 	
 	public static void main(String[] args) {
 		String s = "zsaf%s:nume= %s";
-		test(s);
+//		test(s);
 //		test2(s);
 		
+		for (int i = 0; i < 10_00; i++) {
+			System.out.println(RandomUtil.randomNumbers(6));
+		}
 		
 	}
 	
