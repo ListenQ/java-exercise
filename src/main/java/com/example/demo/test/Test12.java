@@ -36,17 +36,17 @@ public class Test12 {
 		
 		list.parallelStream().forEach(l ->{
 			
-			executor.execute(new Runnable() {
-				
-				@Override
-				public void run() {
-					int i = 1,j=2;
-					System.out.println(++i);
-					System.out.println(a-b);
-				}
-			});
+//			executor.execute(new Runnable() {
+//				
+//				@Override
+//				public void run() {
+//					int i = 1,j=2;
+//					System.out.println(++i);
+//					System.out.println(a-b);
+//				}
+//			});
 		});
-		executor.shutdownNow();
+//		executor.shutdownNow();
 		
 		
 		
