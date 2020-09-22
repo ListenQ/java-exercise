@@ -20,6 +20,8 @@ public class Test14 {
 		String digestHex = SmUtil.sm3(content);
 		System.out.println("sm3加密后："+digestHex);
 
+		////////////////////////////////////////////////////////////////
+		
 		//TODO sm4对称加密 ，一定要128bit秘钥 ==> 32位字符串 ==> 16位的byte数组
 		byte[] stringToBytes = hexStringToBytes(key);
 		String sm4 = SmUtil.sm4(stringToBytes).encryptHex(content);
@@ -36,6 +38,7 @@ public class Test14 {
 		String decryptStr2 = crypto.decryptStr(sm42);
 		System.out.println("sm4随机秘钥解密后："+decryptStr2);
 		
+		////////////////////////////////////////////////////////////////
 		
 		//TODO sm2 非对称加密
 		//使用随机生成的密钥对加密或解密
@@ -47,17 +50,18 @@ public class Test14 {
 		String utf8Str = StrUtil.utf8Str(sm2.decryptFromBcd(encryptBcd, KeyType.PrivateKey));
 		System.out.println("sm2随机秘钥解密后："+utf8Str);
 		
-		// 使用自定义密钥对加密或解密
+		// 生成秘钥key
 		KeyPair pair = SecureUtil.generateKeyPair("SM2");
 		byte[] privateKey = pair.getPrivate().getEncoded();
 		byte[] publicKey = pair.getPublic().getEncoded();
 		String pubStr = bytesToHexString(publicKey);
 		String priStr = bytesToHexString(privateKey);
 		System.out.println("公钥："+pubStr+"\n私钥："+priStr);
+		// 使用自定义密钥对加密或解密
 		SM2 sm22 = SmUtil.sm2(priStr, pubStr);
-		String encryptBcd2 = sm22.encryptBcd(content, KeyType.PublicKey);
+		String encryptBcd2 = sm22.encryptHex(content, KeyType.PublicKey);
 		System.out.println("sm2自定义秘钥加密后："+encryptBcd2);
-		String utf8Str2 = StrUtil.utf8Str(sm22.decryptFromBcd(encryptBcd2, KeyType.PrivateKey));
+		String utf8Str2 = StrUtil.utf8Str(sm22.decryptStr(encryptBcd2, KeyType.PrivateKey));
 		System.out.println("sm2自定义秘钥解密后："+utf8Str2);
 		
 	}
