@@ -3,6 +3,7 @@ package com.example.demo.test;
 import java.security.KeyPair;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.crypto.GlobalBouncyCastleProvider;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.SmUtil;
 import cn.hutool.crypto.asymmetric.KeyType;
