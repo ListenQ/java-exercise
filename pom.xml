@@ -113,7 +113,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.6</version>
+			<version>[8.0.16,)</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-httpclient</groupId>
@@ -148,7 +148,7 @@
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
-			<version>1.4.10</version>
+			<version>[1.4.11,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
