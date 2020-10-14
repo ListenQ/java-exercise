@@ -162,19 +162,26 @@
 		</dependency>
 
 		<!-- 国密算法依赖库 -->
-<!-- 		<dependency>
+		<!-- <dependency>
 			<groupId>org.bouncycastle</groupId>
 			<artifactId>bcprov-jdk15to18</artifactId>
 			<version>1.66</version>
 		</dependency> -->
 		
+		<dependency>
+		    <groupId>org.bouncycastle</groupId>
+		    <artifactId>bcprov-jdk15on</artifactId>
+		    <version>1.65</version>
+		</dependency>
+		
+		
 		<!--国密依赖包-->
         <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcpkix-jdk15on -->
-        <dependency>
+<!--         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcpkix-jdk15on</artifactId>
             <version>1.57</version>
-        </dependency>
+        </dependency> -->
 		
 		<!-- 纤程库0.75对应jdk8 -->
 		<dependency>
