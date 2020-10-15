@@ -1,8 +1,8 @@
-package com.example.demo.sm2;
-
-import org.bouncycastle.math.ec.ECPoint;
+package com.example.demo.encry.sm2;
 
 import java.math.BigInteger;
+
+import org.bouncycastle.math.ec.ECPoint;
 
 /**
  * SM2
