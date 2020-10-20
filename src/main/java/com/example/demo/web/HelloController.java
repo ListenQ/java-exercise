@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.TimeZone;
 import java.util.concurrent.Future;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.async.Task;
+import com.example.demo.cp.TestDto;
 import com.example.demo.listener.Demo2Event;
 import com.example.demo.listener.Demo3Event;
 import com.example.demo.listener.DemoEvent;
@@ -29,7 +32,14 @@ public class HelloController {
 	
     @Autowired
     private ApplicationContext context;
+    
+//    @Resource(name="testServiceImpl2")
+//    private TestService testService;
+    
+    @Resource(name="t2")
+    private TestDto testDto;
 	
+    
 	@RequestMapping("/hello")
 	public Object index() throws Exception{
 		Map<String, Object> map =new HashMap<>();
@@ -40,6 +50,10 @@ public class HelloController {
 		System.out.println(doTaskOne3);
 //		Future<Object> one11 = task.doTaskOne11();
 //		System.out.println(one11.get());
+//		testService.doSomething();
+		
+		
+		System.out.println(testDto.toString());
 		return map;
 	}
 	

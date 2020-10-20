@@ -8,6 +8,7 @@ import com.example.demo.config.SerializerBigDecimal;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+
 public class TestDto {
 	
 	private String name;
@@ -15,6 +16,8 @@ public class TestDto {
 	private Date date;
 	
 	private BigDecimal number;
+	
+	
 
 	public String getName() {
 		return name;
