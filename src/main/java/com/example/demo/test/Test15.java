@@ -31,10 +31,17 @@ public class Test15 {
 				"  }";
 		
 		 s = "{阿斯顿发生asdf:1245}";
-		System.out.println(StrUtil.subAfter(s,"asdf",true));
-		System.out.println(StrUtil.subPre(s,s.indexOf("kk")));
-		System.out.println(StrUtil.subBetween(s, ":", "}"));
-		System.out.println(StrUtil.unWrap(s, ":", "}"));
+//		System.out.println(StrUtil.subAfter(s,"asdf",true));
+//		System.out.println(StrUtil.subPre(s,s.indexOf("kk")));
+//		System.out.println(StrUtil.subBetween(s, ":", "}"));
+//		System.out.println(StrUtil.unWrap(s, ":", "}"));
+		 
+		 
+		 String ss = "reponse";
+		 System.out.println(ss.contains("reponse"));
+		 System.out.println(ss.startsWith("re"));
+		 System.out.println(StrUtil.containsAny(ss, "re"));
+		 System.out.println(StrUtil.join(StrUtil.COLON, "sadf",null));
 	}
 	
 
