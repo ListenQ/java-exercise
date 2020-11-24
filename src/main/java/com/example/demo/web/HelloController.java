@@ -115,10 +115,11 @@ public class HelloController {
 		System.out.println("美国纽约时间:"+DateTimeTest.dataFormat(date,ZoneId.of("America/New_York")));
 		map.put("date", date);
 		
-		
+		//美东时间转北京时间字符串
 		String dataFormat = DateTimeTest.dataFormat(date, ZoneId.of("Asia/Shanghai"));
 		System.err.println(dataFormat);
 		
+		//在全局美东时区获得一个北京时区时间
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		format.setTimeZone(TimeZone.getTimeZone(ZoneId.of("Asia/Shanghai")));
 		String str= format.format(new Date(date.getTime()));

@@ -1,5 +1,7 @@
 package com.example.demo.test;
 
+import java.math.BigDecimal;
+
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,6 +44,10 @@ public class Test15 {
 		 System.out.println(ss.startsWith("re"));
 		 System.out.println(StrUtil.containsAny(ss, "re"));
 		 System.out.println(StrUtil.join(StrUtil.COLON, "sadf",null));
+		 
+		 
+		//(昨收价 * 总股本)之和
+//         BigDecimal preTotalMarkValue = list.stream().map(ca -> ca.getTotalCapitalStock().multiply(ca.getPreClose())).reduce(BigDecimal.ZERO, BigDecimal::add);
 	}
 	
 
