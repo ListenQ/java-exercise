@@ -71,17 +71,17 @@ public class Test15 {
          list2.remove(1);
          
          Map<BigDecimal, BigDecimal> collect = list2.stream().peek(l ->{
-        	 if (l.compareTo(BigDecimal.ONE) < 0) {
+        	 if (l.compareTo(BigDecimal.TEN) > 0) {
 				throw new ApiException("异常");
         	 }
          }).filter(l -> {
-        	 if (!list.contains(l)) {
+        	 if (list.contains(l)) {
         		 System.err.println("true"+l);
         		 return true;
         	 }
         	 System.err.println("false"+l);
         	 return false;
-         }).collect(Collectors.toMap(BigDecimal::abs, d -> d,(x,y) -> y));
+         }).collect(Collectors.toMap(b -> b, d -> d,(x,y) -> y));
          
          System.out.println(collect);
 	}
