@@ -1,8 +1,14 @@
 package com.example.demo.test;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-import cn.hutool.core.util.StrUtil;
+import com.example.demo.exception.ApiException;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -39,15 +45,45 @@ public class Test15 {
 //		System.out.println(StrUtil.unWrap(s, ":", "}"));
 		 
 		 
-		 String ss = "reponse";
-		 System.out.println(ss.contains("reponse"));
-		 System.out.println(ss.startsWith("re"));
-		 System.out.println(StrUtil.containsAny(ss, "re"));
-		 System.out.println(StrUtil.join(StrUtil.COLON, "sadf",null));
+//		 String ss = "reponse";
+//		 System.out.println(ss.contains("reponse"));
+//		 System.out.println(ss.startsWith("re"));
+//		 System.out.println(StrUtil.containsAny(ss, "re"));
+//		 System.out.println(StrUtil.join(StrUtil.COLON, "sadf",null));
 		 
 		 
-		//(昨收价 * 总股本)之和
-//         BigDecimal preTotalMarkValue = list.stream().map(ca -> ca.getTotalCapitalStock().multiply(ca.getPreClose())).reduce(BigDecimal.ZERO, BigDecimal::add);
+		 List<BigDecimal> list = new ArrayList<>();
+		 
+		 BigDecimal total = new BigDecimal("500");
+		 
+		 list.add(BigDecimal.ONE);
+		 list.add(new BigDecimal("2"));
+		 list.add(new BigDecimal("3"));
+		 total = list.stream().map(ca -> ca.multiply(BigDecimal.TEN)).reduce(total, BigDecimal::add);
+//         System.out.println(total);
+         
+         list.addAll(Arrays.asList(BigDecimal.ONE,BigDecimal.TEN));
+         //System.out.println(list);
+         System.out.println("-------------------");
+         
+         
+         List<BigDecimal> list2 = new ArrayList<>(list);
+         list2.remove(1);
+         
+         Map<BigDecimal, BigDecimal> collect = list2.stream().peek(l ->{
+        	 if (l.compareTo(BigDecimal.ONE) < 0) {
+				throw new ApiException("异常");
+        	 }
+         }).filter(l -> {
+        	 if (!list.contains(l)) {
+        		 System.err.println("true"+l);
+        		 return true;
+        	 }
+        	 System.err.println("false"+l);
+        	 return false;
+         }).collect(Collectors.toMap(BigDecimal::abs, d -> d,(x,y) -> y));
+         
+         System.out.println(collect);
 	}
 	
 
