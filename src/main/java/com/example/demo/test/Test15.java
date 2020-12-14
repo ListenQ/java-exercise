@@ -3,6 +3,7 @@ package com.example.demo.test;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -54,9 +55,9 @@ public class Test15 {
 		 BigDecimal total = new BigDecimal("500");
 		 
 		 List<BigDecimal> list = new ArrayList<>();
-//		 list.add(BigDecimal.ONE);
+		 list.add(BigDecimal.ONE);
 		 list.add(new BigDecimal("20.0000"));
-//		 list.add(new BigDecimal("3"));
+		 list.add(new BigDecimal("3"));
 //		 total = list.stream().map(ca -> ca.multiply(BigDecimal.TEN)).reduce(total, BigDecimal::add);
 //         System.out.println(total);
          
@@ -65,8 +66,18 @@ public class Test15 {
          System.out.println("-------------------");
          
          
-//         List<BigDecimal> list2 = new ArrayList<>(list);
-//         list2.remove(1);
+         List<BigDecimal> list2 = new ArrayList<>(list);
+         list2.remove(1);
+         
+         
+         List<BigDecimal> list3 = list.stream().filter(l-> !list2.contains(l)).collect(Collectors.toList());
+         
+         list3.forEach( l ->{
+        	 l = BigDecimal.ZERO;
+         });
+         
+         list2.addAll(list3);
+         System.out.println(list2);
          
 //         Map<BigDecimal, BigDecimal> collect = list2.stream().peek(l ->{
 //        	 if (l.compareTo(BigDecimal.ONE) > 0) {
@@ -81,9 +92,9 @@ public class Test15 {
 //        	 return false;
 //         }).collect(Collectors.toMap(b -> b, d -> d,(x,y) -> y));
          
-         BigDecimal decimal = list.stream().map(l -> l).reduce(BigDecimal.ZERO,BigDecimal::add);
+//         BigDecimal decimal = list.stream().map(l -> l).reduce(BigDecimal.ZERO,BigDecimal::add);
          
-         System.out.println(decimal);
+//         System.out.println(decimal);
 	}
 	
 
