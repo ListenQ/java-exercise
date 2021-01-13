@@ -23,7 +23,7 @@ public class Ctest_Num_Reverse {
 		for(; x !=0 ;) {
 			//有溢出int范围的可能
 			tmp = tmp*10 + x%10;
-			x = x /10;
+			x /= 10;
 		}
 		if (tmp < -1<<31 || tmp > (1<<31)-1) {
 			return 0;
