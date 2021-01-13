@@ -20,7 +20,9 @@ public class SelectSortTest {
 	}
 	
 	
-	
+	/**
+	 * 选择排序
+	 */
 	public static void selectSort(int[] arr) {
 		if(null == arr || arr.length < 2) {
 			return;

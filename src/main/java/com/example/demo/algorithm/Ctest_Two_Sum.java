@@ -6,13 +6,13 @@ import java.util.Map;
 
 /**
  * 算法-两数之和
- * Ctest1<BR>
+ * Ctest_Two_Sum<BR>
  * 创建人：zhangqi <BR>
  * 时间：2020年4月26日-下午11:46:08 <BR>
  * @version 1.0.0
  * 
  */
-public class Ctest1 {
+public class Ctest_Two_Sum {
 	
 	
 	public static void main(String[] args) {
