@@ -15,8 +15,7 @@ public class Ctest_Num_Reverse {
 		System.out.println((System.nanoTime() - start)+"***"+reverse);
 	}
 	
-	// -2^32   = -2147483648
-	// 2^32-1  = 2147483647
+	
 	public static int reverse(int x) {
 		long tmp = 0;
 		// 一个数 取模10 就是得到个位数
@@ -32,6 +31,8 @@ public class Ctest_Num_Reverse {
 	}
 	
 	
+	// -2^32   = -2147483648
+	// 2^32-1  = 2147483647
 	public static int reverse2(int x) {
 		int tmp = 0;
 		// 一个数 取模10 就是得到个位数
