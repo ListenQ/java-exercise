@@ -3,6 +3,7 @@ package com.example.demo.test;
 import java.security.KeyPair;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.crypto.GlobalBouncyCastleProvider;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.SmUtil;
 import cn.hutool.crypto.asymmetric.KeyType;
@@ -51,12 +52,18 @@ public class Test14 {
 		System.out.println("sm2随机秘钥解密后："+utf8Str);
 		
 		// 生成秘钥key
+		GlobalBouncyCastleProvider.setUseBouncyCastle(true);
+		
 		KeyPair pair = SecureUtil.generateKeyPair("SM2");
 		byte[] privateKey = pair.getPrivate().getEncoded();
 		byte[] publicKey = pair.getPublic().getEncoded();
 		String pubStr = bytesToHexString(publicKey);
 		String priStr = bytesToHexString(privateKey);
-		System.out.println("公钥："+pubStr+"\n私钥："+priStr);
+		
+		
+		pubStr = "033f78d85d29d735b72912fd7d8d1a82e06da504637be4fa0d997214f557ce6865";
+		priStr = "7021c35a1f9bef532d572c016ede6049070d985e30e621d567eacf7eae47cbac";
+		System.out.println("公钥："+pubStr+"\n私钥："+priStr+"\n"+priStr.length());
 		// 使用自定义密钥对加密或解密
 		SM2 sm22 = SmUtil.sm2(priStr, pubStr);
 		String encryptBcd2 = sm22.encryptHex(content, KeyType.PublicKey);

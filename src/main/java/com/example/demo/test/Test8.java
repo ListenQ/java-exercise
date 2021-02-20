@@ -3,12 +3,9 @@ package com.example.demo.test;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.bouncycastle.asn1.dvcs.Data;
 
 public class Test8 {
 	
@@ -126,6 +123,14 @@ public class Test8 {
 //			System.out.println(user2);
 //		}
 		
+//		List<Map<String,String>> list=  new ArrayList<>();
+//		list.sort(new Comparator<Map<String, Object>>(){
+//
+//			@Override
+//			public int compare(Map<String, Object> o1, Map<String, Object> o2) {
+//				return 0;
+//			}
+//		} );
 		
 	}
 	
@@ -164,6 +169,15 @@ public class Test8 {
 		
 	}
 	
+	public static int comp(Map<String,String> map1,Map<String,String> map2) {
+		if( map1.get("id") == null) {
+ 		   return 0;
+ 	   }
+ 	   if(map2.get("id") == null) {
+ 		   return 0;
+ 	   }
+       return map1.get("id").compareTo(map2.get("id"));
+	}
 	
 	static class User{
 		private String name;

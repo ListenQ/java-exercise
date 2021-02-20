@@ -15,6 +15,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
+import com.alibaba.fastjson.serializer.ValueFilter;
 import com.example.demo.mult.thread.countdownlatch.T1;
 import com.example.demo.mult.thread.countdownlatch.T2;
 import com.example.demo.mult.thread.countdownlatch.T3;
@@ -166,6 +167,20 @@ public class Test2 {
 		}
 		return num;
 	}
+	
+	
+	 
+	protected ValueFilter communicationFilter = new ValueFilter() {
+		@Override
+		public Object process(Object obj, String s, Object v) {
+			if(v==null)
+				return "";
+			return v;
+		}
+	};
+	
+	
+	
 	
 	public static JSONObject dataFilter(JSONObject data) {
 		if (data != null) {

@@ -18,6 +18,7 @@ public class DateTimeTest {
 
 	private static final DateTimeFormatter DEFAULT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	private static final DateTimeFormatter DEFAULT_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyyMMdd");
 	
 	private static final String s = new String("123");
 	private static final String ss;
@@ -49,10 +50,15 @@ public class DateTimeTest {
 //		System.out.println(dataFormat(new Date(), ZoneId.of("America/New_York")));
 //		System.out.println(new Date().getTime());
 //		System.out.println(DateFormatUtils.format(1578432120000l, "yyyy-MM-dd HH:mm:ss"));
-		List<Integer> list = new ArrayList<Integer>();
-		list.add(LocalDate.now().getYear());
-		getList(3,LocalDate.now().getYear(),list);
-		System.out.println(list);
+		
+//		List<Integer> list = new ArrayList<Integer>();
+//		list.add(LocalDate.now().getYear());
+//		getList(3,LocalDate.now().getYear(),list);
+//		System.out.println(list);
+		
+		
+		String date = "20201204";
+		System.out.println(DateUtil.parseDate(date, DATE_FORMAT));
 	}
 	
 	private static void getList(int num,int year,List<Integer> list){

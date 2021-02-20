@@ -10,12 +10,25 @@ package com.example.demo.algorithm;
  */
 public class SelectSortTest {
 	
+	public static void main(String[] args) {
+		int[] arr = {5,3,1,4,6,8,7,2,9};
+		selectSort(arr);
+		for (int i : arr) {
+			System.out.print(i+" ");
+		}
+		System.out.println();
+	}
+	
+	
+	/**
+	 * 选择排序
+	 */
 	public static void selectSort(int[] arr) {
 		if(null == arr || arr.length < 2) {
 			return;
 		}
 		
-		// 0 ~ N-1 指的是下标(需要比较交换的范围)最后第N位就一个所以不需要比较交换了 arr.length -1
+		// 0 ~ N-1 指的是下标(需要比较交换的范围)最后第N位就一个所以不需要比较交换了 所以就是到(arr.length -1)
 		// 1 ~ N-1
 		for (int i = 0; i < arr.length -1; i++) {
 			int minIndex = i;
@@ -24,6 +37,7 @@ public class SelectSortTest {
 				//查找最小值下标
 				minIndex = arr[j] < arr[minIndex]? j : minIndex;
 			}
+			//交换当前位置与最小值位置
 			change(arr, i, minIndex);
 		}
 	}
@@ -37,13 +51,6 @@ public class SelectSortTest {
 		arr[j] = tmp;
 	}
 	
-	public static void main(String[] args) {
-		int[] arr = {5,3,1,4,6,8,7,2,9};
-		selectSort(arr);
-		for (int i : arr) {
-			System.out.print(i+" ");
-		}
-		System.out.println();
-	}
+	
 
 }

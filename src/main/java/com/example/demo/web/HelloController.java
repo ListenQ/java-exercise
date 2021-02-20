@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.TimeZone;
 import java.util.concurrent.Future;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.async.Task;
+import com.example.demo.cp.TestDto;
 import com.example.demo.listener.Demo2Event;
 import com.example.demo.listener.Demo3Event;
 import com.example.demo.listener.DemoEvent;
@@ -29,7 +32,14 @@ public class HelloController {
 	
     @Autowired
     private ApplicationContext context;
+    
+//    @Resource(name="testServiceImpl2")
+//    private TestService testService;
+    
+    @Resource(name="t2")
+    private TestDto testDto;
 	
+    
 	@RequestMapping("/hello")
 	public Object index() throws Exception{
 		Map<String, Object> map =new HashMap<>();
@@ -40,6 +50,10 @@ public class HelloController {
 		System.out.println(doTaskOne3);
 //		Future<Object> one11 = task.doTaskOne11();
 //		System.out.println(one11.get());
+//		testService.doSomething();
+		
+		
+		System.out.println(testDto.toString());
 		return map;
 	}
 	
@@ -101,10 +115,11 @@ public class HelloController {
 		System.out.println("美国纽约时间:"+DateTimeTest.dataFormat(date,ZoneId.of("America/New_York")));
 		map.put("date", date);
 		
-		
+		//美东时间转北京时间字符串
 		String dataFormat = DateTimeTest.dataFormat(date, ZoneId.of("Asia/Shanghai"));
 		System.err.println(dataFormat);
 		
+		//在全局美东时区获得一个北京时区时间
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		format.setTimeZone(TimeZone.getTimeZone(ZoneId.of("Asia/Shanghai")));
 		String str= format.format(new Date(date.getTime()));

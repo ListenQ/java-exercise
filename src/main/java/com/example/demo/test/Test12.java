@@ -34,7 +34,7 @@ public class Test12 {
 			    .setWorkQueue(new LinkedBlockingQueue<>(100))
 			    .build();
 		
-		list.parallelStream().forEach(l ->{
+//		list.parallelStream().forEach(l ->{
 			
 //			executor.execute(new Runnable() {
 //				
@@ -45,7 +45,7 @@ public class Test12 {
 //					System.out.println(a-b);
 //				}
 //			});
-		});
+//		});
 //		executor.shutdownNow();
 		
 		
