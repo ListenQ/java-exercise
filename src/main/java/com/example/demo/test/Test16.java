@@ -22,7 +22,7 @@ public class Test16 {
 	
 	@Getter
 	@Setter
-	static class User {
+	public static class User {
 		private Integer age;
 		
 		private String name;
