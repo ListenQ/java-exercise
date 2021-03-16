@@ -1,6 +1,14 @@
 package com.example.demo.test;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import cn.hutool.extra.cglib.CglibUtil;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,9 +23,20 @@ public class Test16 {
 //		p.setName(null);
 		p.setAddress("深圳南山");
 		
-		CglibUtil.copy(p, u);
+//		CglibUtil.copy(p, u);
 		
-		System.out.println(u);
+//		System.out.println(u);
+		
+		
+		List<User> list = new ArrayList<>();
+		list.add(u);
+		list.stream().map(m ->{
+			if (m.getAge() > 20) {
+				System.out.println("进来了");
+				return false;
+			}
+			return m;
+		}).collect(Collectors.toList());
 	}
 	
 	@Getter
@@ -36,17 +55,20 @@ public class Test16 {
 		
 	}
 	
-	@Getter
-	@Setter
+	@Data
 	static class Person {
 		private String name;
 		
 		private String address;
+		
+		@JsonProperty("amount")
+		private BigDecimal amount;
 
 		@Override
 		public String toString() {
-			return "Person [name=" + name + ", address=" + address + "]";
+			return "Person [name=" + name + ", address=" + address + ", amount=" + amount + "]";
 		}
+		
 	}
 
 }
