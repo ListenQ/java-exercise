@@ -6,12 +6,23 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
 import java.util.Date;
 
 public class DateUtil {
 
 	public static final DateTimeFormatter DEFAULT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	public static final DateTimeFormatter DEFAULT_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	/**
+     * 由于YYYMMDD_SIMPLE_DATETIME_FORMAT处理yyyyMMdd格式字符串会出错，所以使用这个用于处理yyyyMMdd情况
+     */
+    public static final DateTimeFormatter YYYMMDD_FILL_DATETIME_FORMAT = new DateTimeFormatterBuilder().appendPattern("yyyyMMdd[[HH][:mm][:ss]]").
+                                                                            parseDefaulting(ChronoField.HOUR_OF_DAY, 0).
+                                                                            parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0).
+                                                                            parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0).
+                                                                            parseDefaulting(ChronoField.MILLI_OF_SECOND, 0).toFormatter();
+	
 
     public static String dataFormat(Date date) {
     	Instant instant = date.toInstant();
