@@ -10,7 +10,7 @@ package com.example.demo.algorithm;
 public class Ctest_Add_Two_Num {
 	
 	public static void main(String[] args) {
-		
+		System.out.println(0010 & 0001);
 	}
 	
 	/**

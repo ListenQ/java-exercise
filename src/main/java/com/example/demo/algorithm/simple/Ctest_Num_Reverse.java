@@ -11,7 +11,7 @@ public class Ctest_Num_Reverse {
 
 	public static void main(String[] args) {
 		long start = System.nanoTime();
-		int reverse = reverse(1463847419);
+		int reverse = reverse2(1463847419);
 		System.out.println((System.nanoTime() - start)+"***"+reverse);
 	}
 	
@@ -38,7 +38,7 @@ public class Ctest_Num_Reverse {
 		// 一个数 取模10 就是得到个位数
 		for(; x !=0 ;) {
 			int pop = x % 10;
-			//正数范围
+			//正数范围                       下面这条件是因为int最大值得个位数是7,int最小值的个位数是-8
 			if (tmp > Integer.MAX_VALUE/10 || tmp == Integer.MAX_VALUE/10 && pop > 7){
 				return 0;
 			}
