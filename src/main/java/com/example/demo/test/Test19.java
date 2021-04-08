@@ -1,6 +1,7 @@
 package com.example.demo.test;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import com.example.demo.util.CodeConvert;
@@ -29,9 +30,20 @@ public class Test19 {
 				"}";
 		
 		
-		Person object = JSONUtil.toJSONObject(json, Person.class);
-		System.out.println(object);
+//		Person object = JSONUtil.toJSONObject(json, Person.class);
+//		System.out.println(object);
 		
+		
+		BigDecimal a = BigDecimal.ZERO;
+		cal(a);
+		System.out.println(a);
+		
+		
+	}
+	
+	static int cal(BigDecimal a) {
+		a.add(BigDecimal.TEN);
+		return 1;
 	}
 	
 	
