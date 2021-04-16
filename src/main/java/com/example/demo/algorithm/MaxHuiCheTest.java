@@ -22,6 +22,8 @@ public class MaxHuiCheTest {
 				new BigDecimal("300"),new BigDecimal("150"),new BigDecimal("100"),new BigDecimal("50"),new BigDecimal("200"));
 		BigDecimal down = getMaxDrawdown(list);
 		System.out.println(down);
+		List<BigDecimal> list2 = repAdd(list);
+		System.out.println(list2);
 	}
 	
 	
@@ -97,6 +99,15 @@ public class MaxHuiCheTest {
         System.out.println("最大回撤率:"+payback+"最大："+maxReturn+"**最小值:"+minReturn);
         return payback;
 	}
+	
+	
+	public static List<BigDecimal> repAdd(List<BigDecimal> list) {
+		for (int i = 1 , l = list.size(); i < l; i++) {
+			list.set(i, list.get(i).add(list.get(i-1)));
+		}
+		return list;
+	}
+	
 	
 
 }
