@@ -85,7 +85,7 @@ public class MaxHuiCheTest {
 			if (min.compareTo(current) > 0) {
 				min = current;
 			}
-			if (max.compareTo(min) !=0 ) {
+			if (max.compareTo(min) != 0) {
 				BigDecimal calPayback = (max.subtract(min)).divide(max,5, BigDecimal.ROUND_DOWN);
 				if (calPayback.compareTo(payback) > 0) {
 					maxReturn = max;
