@@ -101,6 +101,7 @@ public class MaxHuiCheTest {
 	}
 	
 	
+	//叠加
 	public static List<BigDecimal> repAdd(List<BigDecimal> list) {
 		for (int i = 1 , l = list.size(); i < l; i++) {
 			list.set(i, list.get(i).add(list.get(i-1)));
