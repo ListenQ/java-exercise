@@ -19,7 +19,7 @@ public class MaxHuiCheTest {
 	
 	public static void main(String[] args) {
 		List<BigDecimal> list = Arrays.asList(new BigDecimal("5"),new BigDecimal("50"),new BigDecimal("100"),new BigDecimal("200"),new BigDecimal("50"),
-				new BigDecimal("300"),new BigDecimal("150"),new BigDecimal("100"),new BigDecimal("50"),new BigDecimal("200"));
+				new BigDecimal("300"),new BigDecimal("150"),new BigDecimal("100"),new BigDecimal("50"),new BigDecimal("-100"),new BigDecimal("200"));
 		BigDecimal down = getMaxDrawdown(list);
 		System.out.println(down);
 		List<BigDecimal> list2 = repAdd(list);
@@ -28,7 +28,7 @@ public class MaxHuiCheTest {
 	
 	
 	
-	 //FIXME 算法有问题
+	 //FIXME 算法有问题, 方向没有向前
 	public static BigDecimal getMaxDrawDown(List<BigDecimal> list) {
 		// 只有数据量大于等于2个的时候才有回撤率
         if (list == null || list.size() <= 1) {
