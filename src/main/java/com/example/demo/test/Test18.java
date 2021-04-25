@@ -2,12 +2,16 @@ package com.example.demo.test;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import com.example.demo.test.Test16.Person;
-import com.example.demo.util.JacksonUtil;
+
+import lombok.Getter;
 
 public class Test18 {
 	
@@ -29,7 +33,26 @@ public class Test18 {
 		
 		a = null;
 		Optional.ofNullable(a).orElse(new ArrayList<>()).addAll(b);
-		System.out.println(a);
+//		System.out.println(a);
+		
+		
+		IntStream.range(1,3).boxed().collect(Collectors.toMap(Function.identity(), i -> i));
+		
+	}
+	
+	
+	@Getter
+	static enum StockMarketEnum{
+		HK(1, "港股"), US(2, "美股"), A(3, "沪深");
+		private Integer market;
+		private String desc;
+		
+		
+		StockMarketEnum(Integer market, String desc) {
+			this.market = market;
+			this.desc = desc;
+		}
+
 	}
 	
 	
