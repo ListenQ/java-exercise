@@ -29,22 +29,22 @@ public class Test18 {
 //		System.out.println(person.getAmount().negate());
 		
 		// 1 2 持有 3已经清仓 4 中签IPO
-		List<Integer> a = new ArrayList<>();
-		a.add(1);
-		a.add(2);
-		a.add(4);
-		List<Integer> b = new ArrayList<>();
-		b.add(1);
-		b.add(2);
-		b.add(3);
+		List<Person> a = new ArrayList<>();
+		a.add(new Test16.Person("00700", "撒旦法", BigDecimal.ONE));
+		a.add(new Test16.Person("03690", "阿斯蒂芬", BigDecimal.ZERO));
+		a.add(new Test16.Person("02318", "gg", BigDecimal.TEN));
+		List<Person> b = new ArrayList<>();
+		b.add(new Test16.Person("00700", "asdf", BigDecimal.TEN));
+		b.add(new Test16.Person("03690", "wetr", BigDecimal.ONE));
+		b.add(new Test16.Person("00005", "hfrg", BigDecimal.ZERO));
 		
 		
-		List<Integer> collect = a.stream().filter(l -> b.contains(l)).collect(Collectors.toList());
-		System.out.println(collect);
-		List<Integer> collect2 = Stream.of(a,b).flatMap(x -> x.stream()).distinct().collect(Collectors.toList());
+//		List<Person> collect = a.stream().filter(l -> b.contains(l)).collect(Collectors.toList());
+//		System.out.println(collect);
+		//取并集
+		List<Person> collect2 = Stream.of(a,b).flatMap(x -> x.stream()).filter(j -> a.stream().map(Person::getName).collect(Collectors.toList()).contains(j.getName())).collect(Collectors.toList());
 		System.out.println(collect2);
 		
-		a = null;
 		Optional.ofNullable(a).orElse(new ArrayList<>()).addAll(b);
 //		System.out.println(a);
 		

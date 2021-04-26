@@ -8,8 +8,10 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import cn.hutool.extra.cglib.CglibUtil;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 public class Test16 {
@@ -56,6 +58,8 @@ public class Test16 {
 	}
 	
 	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
 	static class Person {
 		private String name;
 		
