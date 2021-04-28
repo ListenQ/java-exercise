@@ -81,7 +81,7 @@ public class Java8Tester {
 		Vehicle vehicle = new Car();
 		vehicle.print();
 
-		// TODO 流 Stream stream串行流,parallelStream并行流
+		// TODO 流 Stream stream串行流,parallelStream并行流  filter里是过滤   条件为false的
 		List<String> strs = Arrays.asList("abs", "", "bc", "egf", "abcd", "jlk");
 		List<String> collect = strs.stream().filter(str -> !str.isEmpty()).collect(Collectors.toList());
 		System.out.println(collect);

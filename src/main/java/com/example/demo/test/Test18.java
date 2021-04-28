@@ -2,7 +2,9 @@ package com.example.demo.test;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -45,11 +47,22 @@ public class Test18 {
 		List<Person> collect2 = Stream.of(a,b).flatMap(x -> x.stream()).filter(j -> a.stream().map(Person::getName).collect(Collectors.toList()).contains(j.getName())).collect(Collectors.toList());
 		System.out.println(collect2);
 		
+		Map<String,Test16.Person> map = new HashMap<>();
+//		Stream.of(a,b).flatMap(x -> x.stream()).forEach(s -> map.merge(s.getName(), s));
+		
+		BigDecimal aa = BigDecimal.ZERO ,bb = BigDecimal.ZERO;
+		for (Person person2 : collect2) {
+			bb = bb.add(person2.getAmount());
+		}
+		System.out.println("累加"+bb);
+		
 		Optional.ofNullable(a).orElse(new ArrayList<>()).addAll(b);
 //		System.out.println(a);
 		
 		
 		IntStream.range(1,3).boxed().collect(Collectors.toMap(Function.identity(), i -> i));
+		
+		
 		
 	}
 	

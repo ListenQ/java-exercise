@@ -57,8 +57,8 @@ public class DateTimeTest {
 //		System.out.println(list);
 		
 		
-		String date = "20201204";
-		System.out.println(DateUtil.parseDate(date, DATE_FORMAT));
+		String date = "2020-12-04 11:15:20";
+		System.out.println(DateUtil.parseDate(date, DEFAULT_DATETIME_FORMAT).compareTo(new Date()));
 	}
 	
 	private static void getList(int num,int year,List<Integer> list){

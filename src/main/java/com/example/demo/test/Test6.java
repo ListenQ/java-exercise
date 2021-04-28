@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import lombok.Data;
+
 public class Test6 {
 
 	
@@ -47,11 +49,20 @@ public class Test6 {
 		Map<String, Person> collect3 = list.stream().collect(Collectors.toMap(Person::getName, p -> p , (p1,p2) -> p2));
 		System.out.println("转map对象："+collect3);
 		
+		//List 转Map<k,v> key自定义，重复key覆盖
+		Map<String, Person> collect4 = list.stream().collect(Collectors.toMap(pp -> getMapKey(pp), p -> p , (p1,p2) -> p2));
+		System.out.println("转map对象："+collect4);
+		
 		list.sort(Comparator.comparing(Person::getAge).reversed());
 		Integer total = list.subList(3, list.size()).parallelStream().map(Person::getAge).reduce(0,Integer::sum);
 		List<Person> subList = list.subList(0, 3);
 		subList.add(new Person("其他之和", "sdfssd", total));
 		System.out.println(subList);
+	}
+	
+	
+	private static String getMapKey(Person person) {
+		return person.getName()+ person.getAge();
 	}
 	
 	/**
@@ -61,6 +72,8 @@ public class Test6 {
 		return person.getAge() > 20;
 	}
 	
+	
+	@Data
 	static class Person{
 		private String name;
 		private String pwd;
