@@ -13,6 +13,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import cn.hutool.core.date.DateField;
+import cn.hutool.core.date.DateTime;
+
 public class DateTimeTest {
 	
 
@@ -59,6 +62,16 @@ public class DateTimeTest {
 		
 		String date = "2020-12-04 11:15:20";
 		System.out.println(DateUtil.parseDate(date, DEFAULT_DATETIME_FORMAT).compareTo(new Date()));
+		
+		
+		Date start = DateUtil.parseDate("2021-02-18 00:00:00");
+		Date end = DateUtil.parseDate("2021-03-29 00:00:00");
+		
+		DateTime beginOfYear = cn.hutool.core.date.DateUtil.beginOfYear(new Date());
+		System.out.println(beginOfYear);
+		List<DateTime> rangeToList = cn.hutool.core.date.DateUtil.rangeToList(start, end, DateField.DAY_OF_YEAR);
+		rangeToList.forEach(System.out::println);
+		
 	}
 	
 	private static void getList(int num,int year,List<Integer> list){
