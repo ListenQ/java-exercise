@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.annotation.JSONField;
 import com.example.demo.util.CodeConvert;
 import com.example.demo.util.CodeConvert2;
 import com.example.demo.util.JSONUtil;
@@ -25,25 +29,27 @@ public class Test19 {
 		String json = "{ \r\n" + 
 				"  \"name\":\"asdf\",\r\n" + 
 				"   \"address\":\"asdfasdf\",\r\n" + 
-				"  \"date\":\"20210324\",\r\n" + 
+				"  \"date\":1617763594515,\r\n" + 
 				"  \"code\":\"700\"\r\n" + 
 				"}";
 		
 		
-//		Person object = JSONUtil.toJSONObject(json, Person.class);
-//		System.out.println(object);
+		Person object = JSONUtil.toJSONObject(json, Person.class);
+		Person object2 = JSONObject.parseObject(json,Person.class);
+//		System.out.println(object2);
 		
 		
-		BigDecimal a = BigDecimal.ZERO;
+		BigDecimal [] a = {BigDecimal.ZERO};
 		cal(a);
-		System.out.println(a);
+		for (BigDecimal bigDecimal : a) {
+			System.out.println(bigDecimal);
+		}
 		
 		
 	}
 	
-	static int cal(BigDecimal a) {
-		a.add(BigDecimal.TEN);
-		return 1;
+	static void cal(BigDecimal[] a) {
+		a[0] = a[0].add(BigDecimal.TEN);
 	}
 	
 	
@@ -54,10 +60,12 @@ public class Test19 {
 		
 		private String address;
 		
-		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyyMMdd",timezone = "GMT+8")
+		@JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
+//		@DateTimeFormat(pattern = "yyyy-MM-dd")
+//		@JSONField(format="yyyy-MM-dd")
 		private Date date;
 		
-		@JsonDeserialize(using = CodeConvert.class)
+//		@JsonDeserialize(using = CodeConvert.class)
 //		@JsonSerialize(using = CodeConvert2.class)
 		private String code;
 		

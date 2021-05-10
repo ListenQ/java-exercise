@@ -63,14 +63,20 @@ public class DateTimeTest {
 		String date = "2020-12-04 11:15:20";
 		System.out.println(DateUtil.parseDate(date, DEFAULT_DATETIME_FORMAT).compareTo(new Date()));
 		
+		System.out.println("-----------------");
 		
-		Date start = DateUtil.parseDate("2021-02-18 00:00:00");
+		System.out.println(cn.hutool.core.date.DateUtil.truncate(new Date(), DateField.DAY_OF_YEAR));
+		
+		
+		
+		Date start = DateUtil.parseDate("2021-03-01 00:00:00");
 		Date end = DateUtil.parseDate("2021-03-29 00:00:00");
 		
 		DateTime beginOfYear = cn.hutool.core.date.DateUtil.beginOfYear(new Date());
-		System.out.println(beginOfYear);
+//		System.out.println(beginOfYear);
+//		System.out.println(beginOfYear.compareTo(start));
 		List<DateTime> rangeToList = cn.hutool.core.date.DateUtil.rangeToList(start, end, DateField.DAY_OF_YEAR);
-		rangeToList.forEach(System.out::println);
+//		rangeToList.forEach(System.out::println);
 		
 	}
 	
