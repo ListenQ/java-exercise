@@ -42,7 +42,7 @@ public class Test19 {
 		BigDecimal [] a = {BigDecimal.ZERO};
 		cal(a);
 		for (BigDecimal bigDecimal : a) {
-			System.out.println(bigDecimal);
+			System.out.println(bigDecimal.subtract(null));
 		}
 		
 		
