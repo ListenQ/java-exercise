@@ -10,9 +10,24 @@ package com.example.demo.algorithm.simple;
  */
 public class Ctest_Byte {
 	
+	
+	
 	public static void main(String[] args) {
+		
+		/**
+		 * & 两个为1才为1，其他为0
+		 * | 两个位只要有一个为1就为1，否则就为0
+		 * ^ 相同为0，不同为1
+		 * ~ 0变1，1变0
+		 */
+		
 		// 利用位运算判断一个数是奇偶数
 		//      110     111
+		// << 左移 对于int类型大于等于32得要做 % 32 之后，long 类型要 %64位 
+		// 正数  原码补码和反码是一样得
+		//  原码 转 补码 => 符号位不变，其他位取反+1
+		//  补码 转 原码 => -1 后 符号位不变在 取反
+		// >> 右移 对于负数  要先将原码 ==>(符号位保持不变，按位取反) 获得反码 进行移动后  ==>(反码+1)    获取补码   
 		int n = 6 , m = 8;
 		System.out.println(isOdd(m));
 		System.out.println("---------------");
