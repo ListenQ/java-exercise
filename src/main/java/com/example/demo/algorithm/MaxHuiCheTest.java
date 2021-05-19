@@ -18,12 +18,14 @@ public class MaxHuiCheTest {
 	
 	
 	public static void main(String[] args) {
-		List<BigDecimal> list = Arrays.asList(new BigDecimal("5"),new BigDecimal("50"),new BigDecimal("100"),new BigDecimal("200"),new BigDecimal("50"),
-				new BigDecimal("300"),new BigDecimal("150"),new BigDecimal("100"),new BigDecimal("50"),new BigDecimal("-100"),new BigDecimal("200"));
-		BigDecimal down = getMaxDrawdown(list);
-		System.out.println(down);
+		List<BigDecimal> list = Arrays.asList(new BigDecimal("-100"),new BigDecimal("-50")
+//				,new BigDecimal("0"),new BigDecimal("-1873.97"),new BigDecimal("-476.8")
+//				,new BigDecimal("300"),new BigDecimal("150"),new BigDecimal("100"),new BigDecimal("50"),new BigDecimal("-100"),new BigDecimal("200")
+				);
 		List<BigDecimal> list2 = repAdd(list);
 		System.out.println(list2);
+		BigDecimal down = getMaxDrawdown(list);
+		System.out.println(down);
 	}
 	
 	
@@ -71,7 +73,7 @@ public class MaxHuiCheTest {
 	
 	
 	public static BigDecimal getMaxDrawdown(List<BigDecimal> list) {
-		if (CollUtil.isEmpty(list) || list.size() < 2) {
+		if (CollUtil.isEmpty(list) || list.size() < 1) {
 			return BigDecimal.ZERO;
 		}
         BigDecimal max = new BigDecimal(Integer.MIN_VALUE);
@@ -88,7 +90,7 @@ public class MaxHuiCheTest {
 				min = current;
 			}
 			if (max.compareTo(min) != 0) {
-				BigDecimal calPayback = (max.subtract(min)).divide(max,5, BigDecimal.ROUND_DOWN);
+				BigDecimal calPayback = (max.subtract(min)).divide(max.abs(),5, BigDecimal.ROUND_DOWN);
 				if (calPayback.compareTo(payback) > 0) {
 					maxReturn = max;
 					minReturn = min;
