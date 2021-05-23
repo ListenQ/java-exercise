@@ -7,11 +7,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import cn.hutool.core.date.DateField;
 import cn.hutool.core.date.DateTime;
@@ -59,8 +57,8 @@ public class DateTimeTest {
 //		getList(3,LocalDate.now().getYear(),list);
 //		System.out.println(list);
 		
-		
-		String date = "2020-12-04 11:15:20";
+	
+		String date = "2021-05-21 12:00:00";
 		System.out.println(DateUtil.parseDate(date, DEFAULT_DATETIME_FORMAT).compareTo(new Date()));
 		
 		System.out.println("-----------------");
