@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 算法-两数之和
+ * 算法-两数之和 LeetCode 简单的第1题
  * Ctest_Two_Sum<BR>
  * 创建人：zhangqi <BR>
  * 时间：2020年4月26日-下午11:46:08 <BR>

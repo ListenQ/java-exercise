@@ -1,7 +1,7 @@
 package com.example.demo.algorithm.simple;
 
 /**
- * 最长公共前缀
+ * 最长公共前缀 LeetCode 简单第14题
  * Ctest_LongestCommonPrefix
  * @author zhangqi 
  * @date 2021年1月16日-上午10:48:38

@@ -83,14 +83,19 @@ public class MaxHuiCheTest {
         BigDecimal payback = BigDecimal.ZERO;
         for (BigDecimal current : list) {
 			if (max.compareTo(current) < 0) {
+				//控制最高点和最低点在同一位置上
 				max = current;
 				min = current;
 			}
 			if (min.compareTo(current) > 0) {
+				//当前值与最低点比较,跟新最低点
 				min = current;
 			}
+			//最高点和最低点不相等的时候才有最大回撤率
 			if (max.compareTo(min) != 0) {
+				//回撤率 = (区间最高点 - 区间最低点) / |区间最高点| 
 				BigDecimal calPayback = (max.subtract(min)).divide(max.abs(),5, BigDecimal.ROUND_DOWN);
+				//比较当前回撤率，跟新最大的一个回撤率
 				if (calPayback.compareTo(payback) > 0) {
 					maxReturn = max;
 					minReturn = min;

@@ -1,7 +1,7 @@
 package com.example.demo.algorithm.simple;
 
 /**
- * 回文数
+ * 回文数LeetCode 简单第9题
  * Ctest_Palindrome
  * @author zhangqi 
  * @date 2021年1月13日-下午3:58:09

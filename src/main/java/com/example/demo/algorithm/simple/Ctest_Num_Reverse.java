@@ -1,7 +1,7 @@
 package com.example.demo.algorithm.simple;
 
 /**
- * 整数反转
+ * 整数反转LeetCode 简单第7题
  * Ctest_Num_Reverse
  * @author zhangqi 
  * @date 2021年1月13日-上午10:16:52
