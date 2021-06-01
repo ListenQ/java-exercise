@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.example.demo.mult.thread.Executor;
 
 /**
- * servlet异步处理
+ * servlet3.0异步处理
  * !!需要在Annotation中注明 asyncSupported=true;
  * AsyncDemoServlet<BR>
  * 创建人：zhangqi <BR>
