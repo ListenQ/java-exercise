@@ -180,7 +180,7 @@ public class HelloController {
 			}
 		};
 
-		int size = 10000;
+		int size = 500;
 		Thread[] threads = new Thread[size];
 		for (int i = 0; i < threads.length; i++) {
 			threads[i] = new Thread(r);
@@ -210,7 +210,7 @@ public class HelloController {
 //			for (int i = 0; i < 200; i++) result += i;
 //		}
 		HttpUtil.createGet("https://zhuorui-public-pre.oss-cn-shenzhen.aliyuncs.com/chip/HK/00700.txt");
-//		System.out.println(System.currentTimeMillis());
+		System.out.println(System.currentTimeMillis());
 //		ThreadUtil.safeSleep(10);
 	}
 	
