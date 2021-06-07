@@ -162,8 +162,8 @@ public class HelloController {
 			threads[i].join();
 		}
 
-		System.out.println(System.currentTimeMillis() - start);
-		return "";
+		System.out.println("fiber耗时:"+(System.currentTimeMillis() - start));
+		return "success";
 	}
 	
 	
@@ -191,8 +191,8 @@ public class HelloController {
 			threads[i].join();
 		}
 
-		System.out.println(System.currentTimeMillis() - start);
-		return "";
+		System.out.println("线程耗时:"+(System.currentTimeMillis() - start));
+		return "success";
 	}
 	
 	
@@ -206,7 +206,8 @@ public class HelloController {
 //		for (int m = 0; m < 10000; m++) {
 //			for (int i = 0; i < 200; i++) result += i;
 //		}
-		HttpUtil.createGet("https://github.com/");
+//		HttpUtil.createGet("https://github.com/");
+		ThreadUtil.safeSleep(100);
 	}
 	
 	
