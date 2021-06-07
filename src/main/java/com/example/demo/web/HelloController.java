@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 import javax.annotation.Resource;
@@ -28,6 +29,9 @@ import com.example.demo.test.DateTimeTest;
 
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.http.HttpUtil;
+import co.paralleluniverse.fibers.Fiber;
+import co.paralleluniverse.fibers.SuspendExecution;
+import co.paralleluniverse.strands.SuspendableRunnable;
 
 @RestController
 public class HelloController {
@@ -139,28 +143,27 @@ public class HelloController {
 	
 	
 	@GetMapping("/fiber")
-	public Object testFiber() throws InterruptedException {
+	public Object testFiber() throws InterruptedException, ExecutionException {
 		long start = System.currentTimeMillis();
-		Runnable r = new Runnable() {
-			@Override
-			public void run() {
-				calc();
-			}
-		};
-
+		
+		SuspendableRunnable runnable = new SuspendableRunnable() {
+            public void run() throws SuspendExecution, InterruptedException {
+                calc();
+            }
+        };
+		
 		int size = 10000;
-		Thread[] threads = new Thread[size];
-		for (int i = 0; i < threads.length; i++) {
-			threads[i] = new Thread(r);
-		}
-
-		for (int i = 0; i < threads.length; i++) {
-			threads[i].start();
-		}
-
-		for (int i = 0; i < threads.length; i++) {
-			threads[i].join();
-		}
+		Fiber<Void>[] fibers = new Fiber[size];
+		
+        for (int i = 0; i < fibers.length; i++) {
+            fibers[i] = new Fiber<Void>(runnable);
+        }
+        for (int i = 0; i < fibers.length; i++) {
+            fibers[i].start();
+        }
+        for (int i = 0; i < fibers.length; i++) {
+            fibers[i].join();
+        }
 
 		System.out.println("fiber耗时:"+(System.currentTimeMillis() - start));
 		return "success";
@@ -206,8 +209,9 @@ public class HelloController {
 //		for (int m = 0; m < 10000; m++) {
 //			for (int i = 0; i < 200; i++) result += i;
 //		}
-//		HttpUtil.createGet("https://github.com/");
-		ThreadUtil.safeSleep(100);
+		HttpUtil.createGet("https://zhuorui-public-pre.oss-cn-shenzhen.aliyuncs.com/chip/HK/00700.txt");
+//		System.out.println(System.currentTimeMillis());
+//		ThreadUtil.safeSleep(10);
 	}
 	
 	
