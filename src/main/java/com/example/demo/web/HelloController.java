@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +25,9 @@ import com.example.demo.listener.Demo2Event;
 import com.example.demo.listener.Demo3Event;
 import com.example.demo.listener.DemoEvent;
 import com.example.demo.test.DateTimeTest;
+
+import cn.hutool.core.thread.ThreadUtil;
+import cn.hutool.http.HttpUtil;
 
 @RestController
 public class HelloController {
@@ -130,6 +134,79 @@ public class HelloController {
 		
 		
         return map;
+	}
+	
+	
+	
+	@GetMapping("/fiber")
+	public Object testFiber() throws InterruptedException {
+		long start = System.currentTimeMillis();
+		Runnable r = new Runnable() {
+			@Override
+			public void run() {
+				calc();
+			}
+		};
+
+		int size = 10000;
+		Thread[] threads = new Thread[size];
+		for (int i = 0; i < threads.length; i++) {
+			threads[i] = new Thread(r);
+		}
+
+		for (int i = 0; i < threads.length; i++) {
+			threads[i].start();
+		}
+
+		for (int i = 0; i < threads.length; i++) {
+			threads[i].join();
+		}
+
+		System.out.println(System.currentTimeMillis() - start);
+		return "";
+	}
+	
+	
+	@GetMapping("/thread")
+	public Object testThread() throws InterruptedException {
+		long start = System.currentTimeMillis();
+		Runnable r = new Runnable() {
+			@Override
+			public void run() {
+				calc();
+			}
+		};
+
+		int size = 10000;
+		Thread[] threads = new Thread[size];
+		for (int i = 0; i < threads.length; i++) {
+			threads[i] = new Thread(r);
+		}
+
+		for (int i = 0; i < threads.length; i++) {
+			threads[i].start();
+		}
+
+		for (int i = 0; i < threads.length; i++) {
+			threads[i].join();
+		}
+
+		System.out.println(System.currentTimeMillis() - start);
+		return "";
+	}
+	
+	
+	
+	
+	
+	
+	
+	static void calc() {
+//		int result = 0;
+//		for (int m = 0; m < 10000; m++) {
+//			for (int i = 0; i < 200; i++) result += i;
+//		}
+		HttpUtil.createGet("https://github.com/");
 	}
 	
 	

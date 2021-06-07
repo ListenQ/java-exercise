@@ -26,6 +26,7 @@ public class DemoApplication {
 	*/
 	@PostConstruct 
 	void setDefaultTimezone() {
+		System.setProperty("co.paralleluniverse.fibers.detectRunawayFibers", "false");
 	    TimeZone.setDefault(TimeZone.getTimeZone("America/New_York")); 
 	}  
 
