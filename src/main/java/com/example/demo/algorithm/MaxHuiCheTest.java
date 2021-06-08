@@ -18,13 +18,13 @@ public class MaxHuiCheTest {
 	
 	
 	public static void main(String[] args) {
-		List<BigDecimal> list = Arrays.asList(new BigDecimal("-100"),new BigDecimal("-50")
-//				,new BigDecimal("0"),new BigDecimal("-1873.97"),new BigDecimal("-476.8")
+		List<BigDecimal> list = Arrays.asList(new BigDecimal("-80542.5375"),new BigDecimal("-74331.1025")
+				,new BigDecimal("0"),new BigDecimal("0"),new BigDecimal("0")
 //				,new BigDecimal("300"),new BigDecimal("150"),new BigDecimal("100"),new BigDecimal("50"),new BigDecimal("-100"),new BigDecimal("200")
 				);
 		List<BigDecimal> list2 = repAdd(list);
 		System.out.println(list2);
-		BigDecimal down = getMaxDrawdown(list);
+		BigDecimal down = getMaxDrawdown2(list);
 		System.out.println(down);
 	}
 	
@@ -72,7 +72,7 @@ public class MaxHuiCheTest {
 	
 	
 	
-	public static BigDecimal getMaxDrawdown(List<BigDecimal> list) {
+	public static BigDecimal getMaxDrawdown2(List<BigDecimal> list) {
 		if (CollUtil.isEmpty(list) || list.size() < 1) {
 			return BigDecimal.ZERO;
 		}
@@ -103,7 +103,7 @@ public class MaxHuiCheTest {
 				}
 			}
 		}
-        System.out.println("最大回撤率:"+payback+"最大："+maxReturn+"**最小值:"+minReturn);
+        System.out.println("最大回撤率:"+payback+"最大值："+maxReturn+"**最小值:"+minReturn);
         return payback;
 	}
 	
