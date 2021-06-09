@@ -147,12 +147,13 @@ public class HelloController {
 		long start = System.currentTimeMillis();
 		
 		SuspendableRunnable runnable = new SuspendableRunnable() {
+			@Override
             public void run() throws SuspendExecution, InterruptedException {
                 calc();
             }
         };
 		
-		int size = 10000;
+		int size = 50;
 		Fiber<Void>[] fibers = new Fiber[size];
 		
         for (int i = 0; i < fibers.length; i++) {
@@ -180,7 +181,7 @@ public class HelloController {
 			}
 		};
 
-		int size = 500;
+		int size = 50;
 		Thread[] threads = new Thread[size];
 		for (int i = 0; i < threads.length; i++) {
 			threads[i] = new Thread(r);
@@ -209,8 +210,7 @@ public class HelloController {
 //		for (int m = 0; m < 10000; m++) {
 //			for (int i = 0; i < 200; i++) result += i;
 //		}
-		HttpUtil.createGet("https://zhuorui-public-pre.oss-cn-shenzhen.aliyuncs.com/chip/HK/00700.txt");
-		System.out.println(System.currentTimeMillis());
+		HttpUtil.get("https://zhuorui-public-pre.oss-cn-shenzhen.aliyuncs.com/chip/HK/00700.txt",6000*10*2);
 //		ThreadUtil.safeSleep(10);
 	}
 	
