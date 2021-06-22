@@ -10,7 +10,7 @@ import com.example.demo.vo.SubscribedDto;
 public class Test20 {
 	
 	public static void main(String[] args) {
-		List<SubscribedDto> list = new ArrayList<>();
+		List<SubscribedDto> list = new ArrayList<>(6);
 		SubscribedDto dto = new SubscribedDto();
 		dto.setTs("HK");
 		dto.setCode("01256");
@@ -23,6 +23,7 @@ public class Test20 {
 		dto.setEndTime(System.currentTimeMillis());
 		list.add(dto);
 		System.out.println(JSONObject.toJSONString(list));
+		System.out.println(list.size());
 	}
 
 }

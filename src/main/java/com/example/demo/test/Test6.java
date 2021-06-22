@@ -61,6 +61,11 @@ public class Test6 {
 		Map<Integer, Map<String, Person>> collect6 = list.stream().collect(Collectors.groupingBy(p -> p.getAge(), Collectors.toMap(Person::getName, p -> p)));
 		System.out.println("分组map对象在转换map："+collect6);
 		
+		//Map<Map<k,v>> 转为List
+		List<Person> collection7 = collect6.values().stream().flatMap(k -> k.values().stream()).map(p -> p).collect(Collectors.toList());
+		System.out.println("嵌套map转换list:"+collection7);
+		
+		System.out.println("------------------------------------------------------------");
 		list.sort(Comparator.comparing(Person::getAge).reversed());
 		Integer total = list.subList(3, list.size()).parallelStream().map(Person::getAge).reduce(0,Integer::sum);
 		List<Person> subList = list.subList(0, 3);
