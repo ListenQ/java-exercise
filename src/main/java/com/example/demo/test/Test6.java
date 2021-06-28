@@ -57,7 +57,7 @@ public class Test6 {
 		Map<Integer, List<Person>> collect5 = list.stream().collect(Collectors.groupingBy(Person::getAge));
 		System.out.println("分组map对象："+collect5);
 		
-		//List 分组后转Map<k,v>
+		//List 分组后转Map<k,Map<k,v>>
 		Map<Integer, Map<String, Person>> collect6 = list.stream().collect(Collectors.groupingBy(p -> p.getAge(), Collectors.toMap(Person::getName, p -> p)));
 		System.out.println("分组map对象在转换map："+collect6);
 		
